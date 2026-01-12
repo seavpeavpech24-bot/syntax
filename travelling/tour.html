@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Featured Tours - SkyJourney</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans">
+    <!-- Live Demo Ribbon -->
+    <div class="live-demo-ribbon">Live Demo</div>
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">SkyJourney</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-gray-600 hover:text-blue-600 transition">About</a>
+                    <a href="tour.html" class="text-blue-600 font-semibold">Tour</a>
+                    <a href="package.html" class="text-gray-600 hover:text-blue-600 transition">Package</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition">Contact</a>
+                    <button class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                        Book Trip
+                    </button>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-6">Featured Tours</h1>
+            <p class="text-xl text-gray-600 text-center max-w-3xl mx-auto">
+                Discover our handpicked selection of the most exciting and memorable tours around the world.
+            </p>
+        </div>
+    </section>
+
+    <!-- Featured Tours Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Tour Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3" alt="Paris Tour" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full">
+                            $1,299
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Paris City Explorer</h3>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                            <span class="text-gray-600">Paris, France</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Experience the magic of Paris with our 5-day guided tour. Visit iconic landmarks and enjoy authentic French cuisine.</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-600 mr-2"></i>
+                                <span class="text-gray-600">5 Days</span>
+                            </div>
+                            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="https://i.pinimg.com/736x/a6/01/38/a6013820a0c0f5a75d7a10fe74a5b08e.jpg" alt="Bali Tour" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full">
+                            $1,499
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Bali Paradise</h3>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                            <span class="text-gray-600">Bali, Indonesia</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Immerse yourself in Balinese culture with our 7-day tour. Visit temples, beaches, and rice terraces.</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-600 mr-2"></i>
+                                <span class="text-gray-600">7 Days</span>
+                            </div>
+                            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Tour Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3" alt="New York Tour" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full">
+                            $1,199
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">New York City Break</h3>
+                        <div class="flex items-center mb-4">
+                            <i class="fas fa-map-marker-alt text-blue-600 mr-2"></i>
+                            <span class="text-gray-600">New York, USA</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Explore the Big Apple with our 4-day tour. Visit famous landmarks and experience the city's vibrant culture.</p>
+                        <div class="flex items-center justify-between">
+                            <div class="flex items-center">
+                                <i class="fas fa-clock text-gray-600 mr-2"></i>
+                                <span class="text-gray-600">4 Days</span>
+                            </div>
+                            <button class="bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tour Categories Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Tour Categories</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-city text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">City Tours</h3>
+                    <p class="text-gray-600">Explore urban landscapes and cultural landmarks</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-umbrella-beach text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Beach Getaways</h3>
+                    <p class="text-gray-600">Relax and unwind at beautiful beach destinations</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-mountain text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Adventure Tours</h3>
+                    <p class="text-gray-600">Experience thrilling outdoor activities</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-lg text-center">
+                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-utensils text-2xl text-blue-600"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">Food & Culture</h3>
+                    <p class="text-gray-600">Discover local cuisine and traditions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action Section -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 rounded-2xl p-12 text-center text-white">
+                <h2 class="text-3xl font-bold mb-6">Ready to Start Your Adventure?</h2>
+                <p class="text-xl mb-8">Join us on an unforgettable journey and create memories that will last a lifetime.</p>
+                <button class="bg-white text-blue-600 px-8 py-4 rounded-full text-lg font-bold hover:bg-gray-100 transition">
+                    Browse All Tours
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 

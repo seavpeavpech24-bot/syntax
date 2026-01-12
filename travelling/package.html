@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Packages - SkyJourney</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="font-sans">
+    <!-- Live Demo Ribbon -->
+    <div class="live-demo-ribbon">Live Demo</div>
+    <!-- Navigation Bar -->
+    <nav class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600">SkyJourney</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="about.html" class="text-gray-600 hover:text-blue-600 transition">About</a>
+                    <a href="tour.html" class="text-gray-600 hover:text-blue-600 transition">Tour</a>
+                    <a href="package.html" class="text-blue-600 font-semibold">Package</a>
+                    <a href="contact.html" class="text-gray-600 hover:text-blue-600 transition">Contact</a>
+                    <button class="bg-black text-white px-6 py-2 rounded-full hover:bg-gray-800 transition">
+                        Book Trip
+                    </button>
+                </div>
+                <button class="md:hidden text-gray-600">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="pt-32 pb-16 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-4">
+            <h1 class="text-4xl md:text-5xl font-bold text-center mb-6">Travel Packages</h1>
+            <p class="text-xl text-gray-600 text-center max-w-3xl mx-auto">
+                Choose from our carefully curated travel packages designed to provide the best value and experience.
+            </p>
+        </div>
+    </section>
+
+    <!-- Package Categories -->
+    <section class="py-16">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-center space-x-4 mb-12">
+                <button class="px-6 py-3 rounded-full bg-blue-600 text-white font-semibold">All Packages</button>
+                <button class="px-6 py-3 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Honeymoon</button>
+                <button class="px-6 py-3 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Family</button>
+                <button class="px-6 py-3 rounded-full bg-gray-100 text-gray-600 hover:bg-gray-200 transition">Adventure</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Package Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1518684079-3c830dcef090?ixlib=rb-4.0.3" alt="New York Package" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full">
+                            $2,499
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Family Package</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">New York Family Adventure</h3>
+                        <p class="text-gray-600 mb-4">Perfect for families looking to explore the Big Apple together. Includes family-friendly activities and accommodations.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                5 Nights Hotel Stay
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Daily Breakfast
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                City Pass Included
+                            </li>
+                        </ul>
+                        <button class="w-full bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1502602898657-3e91760cbb34?ixlib=rb-4.0.3" alt="Paris Package" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full">
+                            $3,299
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-sm">Honeymoon Package</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Paris Romance Getaway</h3>
+                        <p class="text-gray-600 mb-4">Experience the city of love with our special honeymoon package. Perfect for newlyweds.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                7 Nights Luxury Stay
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Romantic Dinner Cruise
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Couple's Spa Treatment
+                            </li>
+                        </ul>
+                        <button class="w-full bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Package Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="relative">
+                        <img src="https://i.pinimg.com/736x/a6/01/38/a6013820a0c0f5a75d7a10fe74a5b08e.jpg" alt="Bali Package" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-blue-600 text-white px-4 py-2 rounded-full">
+                            $2,999
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <div class="flex items-center mb-4">
+                            <span class="bg-orange-100 text-orange-800 px-3 py-1 rounded-full text-sm">Adventure Package</span>
+                        </div>
+                        <h3 class="text-xl font-bold mb-2">Bali Adventure Explorer</h3>
+                        <p class="text-gray-600 mb-4">Thrill-seekers paradise with exciting activities and cultural experiences.</p>
+                        <ul class="space-y-2 mb-6">
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                6 Nights Resort Stay
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Surfing Lessons
+                            </li>
+                            <li class="flex items-center text-gray-600">
+                                <i class="fas fa-check text-green-500 mr-2"></i>
+                                Temple Tours
+                            </li>
+                        </ul>
+                        <button class="w-full bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                            Book Now
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Special Offers</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <div class="bg-red-100 text-red-800 px-4 py-2 rounded-full inline-block mb-6">
+                            Limited Time Offer
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Early Bird Discount</h3>
+                        <p class="text-gray-600 mb-6">Book your trip 60 days in advance and get 20% off on any package.</p>
+                        <button class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
+                    <div class="p-8">
+                        <div class="bg-green-100 text-green-800 px-4 py-2 rounded-full inline-block mb-6">
+                            New Offer
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4">Group Booking Bonus</h3>
+                        <p class="text-gray-600 mb-6">Book for 4 or more people and get one person's booking free!</p>
+                        <button class="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="script.js"></script>
+</body>
+</html> 
