@@ -1,0 +1,1552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ocean Depths Diving Center - PADI Certified Scuba Diving & Snorkeling</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+        }
+        
+        :root {
+            --ocean-deep: #0A2463;
+            --ocean-blue: #1E3A8A;
+            --aqua: #06B6D4;
+            --turquoise: #14B8A6;
+            --coral: #FB7185;
+            --white: #FFFFFF;
+        }
+        
+        .hero-gradient {
+            background: linear-gradient(135deg, rgba(10, 36, 99, 0.85) 0%, rgba(6, 182, 212, 0.7) 100%);
+        }
+        
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }   
+ 
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        @keyframes slideIn {
+            from { transform: translateX(-100%); }
+            to { transform: translateX(0); }
+        }
+        
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(6, 182, 212, 0.3);
+        }
+        
+        /* Live Demo Ribbon */
+        .live-demo-ribbon {
+            position: fixed;
+            top: 40px;
+            right: -100px;
+            width: 300px;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            text-transform: uppercase;
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--aqua);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+        
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease;
+        }
+        
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 3rem;
+            height: 3rem;
+            background-color: var(--aqua);
+            color: white;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-to-top.active {
+            display: flex;
+        }
+        
+        .scroll-to-top:hover {
+            background-color: var(--turquoise);
+            transform: translateY(-5px);
+        }
+        
+        .sticky-booking {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 999;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .sticky-booking.active {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Live Demo Ribbon -->
+    <div class="live-demo-ribbon">Live Demo</div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed w-full top-0 z-50 transition-all duration-300 bg-white shadow-lg">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-2">
+                    <svg class="w-10 h-10 text-cyan-500" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                    </svg>
+                    <span class="text-2xl font-bold text-blue-900">Ocean Depths</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Home</a>
+                    <a href="#courses" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Courses</a>
+                    <a href="#fun-dives" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Fun Dives</a>
+                    <a href="#snorkeling" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Snorkeling</a>
+                    <a href="#packages" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Packages</a>
+                    <a href="#gallery" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Gallery</a>
+                    <a href="#contact" class="nav-link text-gray-700 hover:text-cyan-500 font-medium">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-gray-700 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu md:hidden fixed top-0 right-0 h-full w-64 bg-blue-900 shadow-2xl z-50">
+            <div class="p-6">
+                <button id="close-menu-btn" class="text-white mb-8 focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="text-white hover:text-cyan-300 font-medium mobile-link">Home</a>
+                    <a href="#courses" class="text-white hover:text-cyan-300 font-medium mobile-link">Courses</a>
+                    <a href="#fun-dives" class="text-white hover:text-cyan-300 font-medium mobile-link">Fun Dives</a>
+                    <a href="#snorkeling" class="text-white hover:text-cyan-300 font-medium mobile-link">Snorkeling</a>
+                    <a href="#packages" class="text-white hover:text-cyan-300 font-medium mobile-link">Packages</a>
+                    <a href="#gallery" class="text-white hover:text-cyan-300 font-medium mobile-link">Gallery</a>
+                    <a href="#contact" class="text-white hover:text-cyan-300 font-medium mobile-link">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen parallax" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=1920');">
+        <div class="absolute inset-0 hero-gradient"></div>
+        <div class="relative container mx-auto px-4 h-full flex items-center justify-center">
+            <div class="text-center text-white fade-in">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6">Explore the Ocean with<br>Certified Dive Professionals</h1>
+                <p class="text-xl md:text-2xl mb-8 font-light">PADI-Certified Diving Center | Safe, Professional, Unforgettable</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#booking" class="bg-cyan-500 hover:bg-cyan-600 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all transform hover:scale-105">Book a Dive</a>
+                    <a href="#courses" class="bg-transparent border-2 border-white hover:bg-white hover:text-blue-900 text-white px-8 py-4 rounded-full font-semibold text-lg transition-all">View Courses</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quick Booking Bar -->
+    <section id="booking" class="py-8 bg-gradient-to-r from-blue-900 to-cyan-600">
+        <div class="container mx-auto px-4">
+            <div class="glassmorphism rounded-2xl p-6 md:p-8">
+                <h3 class="text-2xl font-bold text-white mb-6 text-center">Quick Booking</h3>
+                <form id="booking-form" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div>
+                        <label class="block text-white text-sm mb-2">Activity Type</label>
+                        <select class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-cyan-400" required>
+                            <option value="">Select Activity</option>
+                            <option value="scuba">Scuba Diving</option>
+                            <option value="fun-dive">Fun Dive</option>
+                            <option value="snorkeling">Snorkeling</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm mb-2">Date</label>
+                        <input type="date" class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-cyan-400" required>
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm mb-2">Number of Divers</label>
+                        <input type="number" min="1" max="10" value="1" class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-cyan-400" required>
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm mb-2">Certification Level</label>
+                        <select class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-cyan-400">
+                            <option value="none">No Certification</option>
+                            <option value="open-water">Open Water</option>
+                            <option value="advanced">Advanced</option>
+                            <option value="rescue">Rescue Diver</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button type="submit" class="w-full bg-rose-500 hover:bg-rose-600 text-white px-6 py-3 rounded-lg font-semibold transition-all transform hover:scale-105">
+                            Check Availability
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-6">Welcome to Ocean Depths Diving Center</h2>
+                    <p class="text-gray-700 text-lg mb-6">
+                        For over 15 years, we've been sharing the magic of the underwater world with divers from around the globe. Our PADI-certified instructors are passionate about marine conservation and committed to providing safe, memorable diving experiences.
+                    </p>
+                    <p class="text-gray-700 text-lg mb-8">
+                        Whether you're taking your first breath underwater or exploring advanced dive sites, we ensure every dive is conducted with the highest safety standards and small group sizes for personalized attention.
+                    </p>
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-cyan-500 mb-2">15+</div>
+                            <div class="text-gray-600">Years Experience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-cyan-500 mb-2">5000+</div>
+                            <div class="text-gray-600">Certified Divers</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-cyan-500 mb-2">100%</div>
+                            <div class="text-gray-600">Safety Record</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800" alt="Diving Boat" class="rounded-2xl shadow-2xl">
+                </div>
+            </div>
+            
+            <!-- Highlights -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
+                <div class="text-center p-6 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl">
+                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Certified Instructors</h3>
+                    <p class="text-gray-600">All our instructors are PADI-certified with years of teaching experience</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl">
+                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Safety First</h3>
+                    <p class="text-gray-600">Top-quality equipment, comprehensive briefings, and emergency protocols</p>
+                </div>
+                <div class="text-center p-6 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-xl">
+                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-bold text-blue-900 mb-2">Small Groups</h3>
+                    <p class="text-gray-600">Maximum 4 students per instructor for personalized attention</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Courses Section -->
+    <section id="courses" class="py-20 bg-gradient-to-b from-blue-50 to-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Courses & Certifications</h2>
+                <p class="text-xl text-gray-600">Start your diving journey with PADI-certified courses</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Course Card 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=400" alt="Discover Scuba" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Discover Scuba Diving</h3>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>Half Day</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Perfect introduction to scuba diving. Try diving in a pool and shallow water with an instructor.</p>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$99</div>
+                        <button class="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-lg font-semibold transition-all">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400" alt="Open Water" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Open Water Course</h3>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>3-4 Days</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Get your PADI Open Water certification and dive up to 18 meters worldwide.</p>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$450</div>
+                        <button class="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-lg font-semibold transition-all">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Advanced Open Water" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Advanced Open Water</h3>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>2-3 Days</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Expand your skills with deep diving, navigation, and specialty dives up to 30 meters.</p>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$380</div>
+                        <button class="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-lg font-semibold transition-all">Enroll Now</button>
+                    </div>
+                </div>
+                
+                <!-- Course Card 4 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=400" alt="Rescue Diver" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Rescue Diver</h3>
+                        <div class="flex items-center text-gray-600 mb-4">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <span>3-4 Days</span>
+                        </div>
+                        <p class="text-gray-600 mb-4">Learn to prevent and manage diving emergencies. Most rewarding course you'll take.</p>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$420</div>
+                        <button class="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-lg font-semibold transition-all">Enroll Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Dives Section -->
+    <section id="fun-dives" class="py-20 bg-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Fun Dives & Dive Sites</h2>
+                <p class="text-xl text-gray-600">Explore our spectacular dive sites</p>
+            </div>
+            
+            <!-- Filter Tags -->
+            <div class="flex flex-wrap justify-center gap-4 mb-12">
+                <button class="filter-btn badge bg-cyan-500 text-white hover:bg-cyan-600 transition-all cursor-pointer" data-filter="all">All Sites</button>
+                <button class="filter-btn badge bg-gray-200 text-gray-700 hover:bg-cyan-500 hover:text-white transition-all cursor-pointer" data-filter="beginner">Beginner</button>
+                <button class="filter-btn badge bg-gray-200 text-gray-700 hover:bg-cyan-500 hover:text-white transition-all cursor-pointer" data-filter="advanced">Advanced</button>
+                <button class="filter-btn badge bg-gray-200 text-gray-700 hover:bg-cyan-500 hover:text-white transition-all cursor-pointer" data-filter="night">Night Dive</button>
+                <button class="filter-btn badge bg-gray-200 text-gray-700 hover:bg-cyan-500 hover:text-white transition-all cursor-pointer" data-filter="wreck">Wreck Dive</button>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Dive Site 1 -->
+                <div class="dive-site bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 card-hover" data-category="beginner">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Coral Garden</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                            <span>8-12m</span>
+                        </div>
+                        <span class="badge bg-green-500 text-white">Beginner</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Vibrant coral formations teeming with tropical fish. Perfect for new divers and underwater photography.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span title="Clownfish">🐠</span>
+                        <span title="Sea Turtles">🐢</span>
+                        <span title="Coral">🪸</span>
+                        <span title="Tropical Fish">🐟</span>
+                    </div>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg font-semibold transition-all">Book This Site</button>
+                </div>
+                
+                <!-- Dive Site 2 -->
+                <div class="dive-site bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 card-hover" data-category="advanced">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Blue Abyss Wall</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                            <span>25-40m</span>
+                        </div>
+                        <span class="badge bg-red-500 text-white">Advanced</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Dramatic wall dive with pelagic species. Strong currents and deep waters for experienced divers.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span title="Sharks">🦈</span>
+                        <span title="Rays">🐙</span>
+                        <span title="Barracuda">🐟</span>
+                        <span title="Eagle Rays">🦅</span>
+                    </div>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg font-semibold transition-all">Book This Site</button>
+                </div>
+                
+                <!-- Dive Site 3 -->
+                <div class="dive-site bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 card-hover" data-category="wreck">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">SS Neptune Wreck</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                            <span>18-28m</span>
+                        </div>
+                        <span class="badge bg-yellow-500 text-white">Intermediate</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Historic cargo ship wreck from 1942. Now an artificial reef home to schools of fish and marine life.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span title="Grouper">🐟</span>
+                        <span title="Moray Eels">🐍</span>
+                        <span title="Lionfish">🦁</span>
+                        <span title="Octopus">🐙</span>
+                    </div>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg font-semibold transition-all">Book This Site</button>
+                </div>
+                
+                <!-- Dive Site 4 -->
+                <div class="dive-site bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 card-hover" data-category="night">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Moonlight Bay</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                            <span>10-15m</span>
+                        </div>
+                        <span class="badge bg-purple-500 text-white">Night Dive</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Experience the underwater world after dark. See nocturnal creatures and bioluminescence.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span title="Lobster">🦞</span>
+                        <span title="Crab">🦀</span>
+                        <span title="Squid">🦑</span>
+                        <span title="Jellyfish">🪼</span>
+                    </div>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg font-semibold transition-all">Book This Site</button>
+                </div>
+                
+                <!-- Dive Site 5 -->
+                <div class="dive-site bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 card-hover" data-category="beginner">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Turtle Cove</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                            <span>6-10m</span>
+                        </div>
+                        <span class="badge bg-green-500 text-white">Beginner</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Shallow bay known for frequent sea turtle sightings. Calm waters ideal for beginners.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span title="Sea Turtles">🐢</span>
+                        <span title="Starfish">⭐</span>
+                        <span title="Seahorse">🐴</span>
+                        <span title="Angelfish">🐠</span>
+                    </div>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg font-semibold transition-all">Book This Site</button>
+                </div>
+                
+                <!-- Dive Site 6 -->
+                <div class="dive-site bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-6 card-hover" data-category="advanced">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-3">Shark Point</h3>
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="flex items-center text-gray-600">
+                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                            </svg>
+                            <span>20-30m</span>
+                        </div>
+                        <span class="badge bg-red-500 text-white">Advanced</span>
+                    </div>
+                    <p class="text-gray-600 mb-4">Thrilling dive site with regular reef shark encounters. Strong currents and excellent visibility.</p>
+                    <div class="flex gap-2 mb-4">
+                        <span title="Sharks">🦈</span>
+                        <span title="Manta Rays">🦈</span>
+                        <span title="Tuna">🐟</span>
+                        <span title="Dolphins">🐬</span>
+                    </div>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-2 rounded-lg font-semibold transition-all">Book This Site</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Snorkeling Section -->
+    <section id="snorkeling" class="py-20 bg-gradient-to-b from-cyan-50 to-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Snorkeling & Day Trips</h2>
+                <p class="text-xl text-gray-600">Perfect for families and non-divers</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Snorkeling Trip 1 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Half Day Snorkeling" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="badge bg-cyan-500 text-white mb-3">Equipment Included</span>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Half-Day Snorkeling</h3>
+                        <p class="text-gray-600 mb-4">Visit 2 pristine snorkeling spots. Perfect for beginners and families with children.</p>
+                        <ul class="text-gray-600 mb-4 space-y-2">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                4 hours duration
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Snacks & drinks
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Guide included
+                            </li>
+                        </ul>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$45</div>
+                        <button class="w-full bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-lg font-semibold transition-all">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Snorkeling Trip 2 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=400" alt="Full Day Snorkeling" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="badge bg-cyan-500 text-white mb-3">Equipment Included</span>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Full-Day Adventure</h3>
+                        <p class="text-gray-600 mb-4">Explore 4 amazing locations including a secluded beach. Lunch on board.</p>
+                        <ul class="text-gray-600 mb-4 space-y-2">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                8 hours duration
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Lunch included
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Beach time
+                            </li>
+                        </ul>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$85</div>
+                        <button class="w-full bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-lg font-semibold transition-all">Book Now</button>
+                    </div>
+                </div>
+                
+                <!-- Snorkeling Trip 3 -->
+                <div class="bg-white rounded-2xl shadow-lg overflow-hidden card-hover">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400" alt="Family Package" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="badge bg-rose-500 text-white mb-3">Family Friendly</span>
+                        <h3 class="text-2xl font-bold text-blue-900 mb-2">Family Package</h3>
+                        <p class="text-gray-600 mb-4">Special family rate for 2 adults + 2 kids. Shallow, safe locations perfect for children.</p>
+                        <ul class="text-gray-600 mb-4 space-y-2">
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                5 hours duration
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Kids equipment
+                            </li>
+                            <li class="flex items-center">
+                                <svg class="w-5 h-5 mr-2 text-cyan-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                                Life jackets
+                            </li>
+                        </ul>
+                        <div class="text-3xl font-bold text-cyan-500 mb-4">$180</div>
+                        <button class="w-full bg-rose-500 hover:bg-rose-600 text-white py-3 rounded-lg font-semibold transition-all">Book Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section id="packages" class="py-20 bg-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Packages & Pricing</h2>
+                <p class="text-xl text-gray-600">Save more with our dive packages</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Package 1 -->
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 card-hover">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">Starter Package</h3>
+                    <div class="text-4xl font-bold text-cyan-500 mb-6">$120</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">3 Fun Dives</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Equipment rental included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Boat transfers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Valid for 1 week</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-3 rounded-lg font-semibold transition-all">Select Package</button>
+                </div>
+                
+                <!-- Package 2 - Best Value -->
+                <div class="bg-gradient-to-br from-cyan-500 to-blue-600 rounded-2xl p-8 card-hover relative transform scale-105 shadow-2xl">
+                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="badge bg-rose-500 text-white px-6 py-2 text-sm">BEST VALUE</span>
+                    </div>
+                    <h3 class="text-2xl font-bold text-white mb-4">Explorer Package</h3>
+                    <div class="text-4xl font-bold text-white mb-6">$220</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">6 Fun Dives</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Equipment rental included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Boat transfers & lunch</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">1 Night dive included</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-white flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-white">Valid for 2 weeks</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-white hover:bg-gray-100 text-cyan-600 py-3 rounded-lg font-semibold transition-all">Select Package</button>
+                </div>
+                
+                <!-- Package 3 -->
+                <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 card-hover">
+                    <h3 class="text-2xl font-bold text-blue-900 mb-4">Ultimate Package</h3>
+                    <div class="text-4xl font-bold text-cyan-500 mb-6">$380</div>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">10 Fun Dives</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Premium equipment</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">All meals & transfers</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">2 Night dives + 1 Wreck dive</span>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-2 text-cyan-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            <span class="text-gray-700">Valid for 1 month</span>
+                        </li>
+                    </ul>
+                    <button class="w-full bg-blue-900 hover:bg-blue-800 text-white py-3 rounded-lg font-semibold transition-all">Select Package</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-gradient-to-b from-blue-50 to-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Gallery</h2>
+                <p class="text-xl text-gray-600">Moments from our underwater adventures</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1682687220742-aba13b6e50ba?w=400" alt="Underwater coral" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400" alt="Diver with turtle" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Diving boat" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1583212292454-1fe6229603b7?w=400" alt="School of fish" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?w=400" alt="Coral reef" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1682687221038-404cb8830901?w=400" alt="Divers underwater" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1682687220199-d0124f48f95b?w=400" alt="Marine life" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+                
+                <div class="gallery-item relative overflow-hidden rounded-lg cursor-pointer group">
+                    <img src="https://images.unsplash.com/photo-1682687220923-c58b9a4592ae?w=400" alt="Sunset dive" class="w-full h-64 object-cover transition-transform duration-300 group-hover:scale-110">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
+                        <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"></path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="absolute top-8 right-8 text-white text-4xl cursor-pointer hover:text-cyan-400 transition-colors" id="close-lightbox">&times;</span>
+        <img id="lightbox-img" src="" alt="Gallery image">
+    </div>
+
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">What Our Divers Say</h2>
+                <p class="text-xl text-gray-600">Real experiences from real adventurers</p>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <div id="testimonial-slider" class="overflow-hidden">
+                    <div class="testimonial-track flex transition-transform duration-500">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-slide min-w-full px-4">
+                            <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 md:p-12">
+                                <div class="flex items-center mb-6">
+                                    <div class="flex text-yellow-400 text-2xl">
+                                        ★★★★★
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-lg md:text-xl mb-6 italic">
+                                    "Absolutely incredible experience! The instructors were professional, patient, and made me feel completely safe during my first dive. The underwater world they showed us was breathtaking. I'll definitely be back!"
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                                        SM
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-blue-900 text-lg">Sarah Mitchell</div>
+                                        <div class="text-gray-600">United Kingdom</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-slide min-w-full px-4">
+                            <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 md:p-12">
+                                <div class="flex items-center mb-6">
+                                    <div class="flex text-yellow-400 text-2xl">
+                                        ★★★★★
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-lg md:text-xl mb-6 italic">
+                                    "Got my PADI Open Water certification here and it was the best decision ever! Small class sizes meant lots of personal attention. The dive sites are spectacular with amazing marine life. Highly recommend!"
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                                        MR
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-blue-900 text-lg">Marcus Rodriguez</div>
+                                        <div class="text-gray-600">Spain</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="testimonial-slide min-w-full px-4">
+                            <div class="bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-8 md:p-12">
+                                <div class="flex items-center mb-6">
+                                    <div class="flex text-yellow-400 text-2xl">
+                                        ★★★★★
+                                    </div>
+                                </div>
+                                <p class="text-gray-700 text-lg md:text-xl mb-6 italic">
+                                    "We brought our whole family for the snorkeling day trip and everyone had an amazing time! The crew was fantastic with our kids, and we saw turtles, colorful fish, and beautiful coral. Perfect family adventure!"
+                                </p>
+                                <div class="flex items-center">
+                                    <div class="w-16 h-16 bg-cyan-500 rounded-full flex items-center justify-center text-white text-2xl font-bold mr-4">
+                                        JL
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-blue-900 text-lg">Jennifer Lee</div>
+                                        <div class="text-gray-600">Australia</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Controls -->
+                <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-cyan-500 hover:text-white transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+                    </svg>
+                </button>
+                <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 bg-white rounded-full p-3 shadow-lg hover:bg-cyan-500 hover:text-white transition-all">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Safety & Equipment Section -->
+    <section class="py-20 bg-gradient-to-b from-blue-50 to-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Safety & Equipment</h2>
+                <p class="text-xl text-gray-600">Your safety is our top priority</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-16">
+                <div>
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800" alt="Diving Equipment" class="rounded-2xl shadow-2xl">
+                </div>
+                <div>
+                    <h3 class="text-3xl font-bold text-blue-900 mb-6">Professional Equipment</h3>
+                    <p class="text-gray-700 text-lg mb-6">
+                        We maintain the highest standards with regularly serviced, top-quality diving equipment from leading manufacturers. All gear is inspected before every dive.
+                    </p>
+                    <ul class="space-y-4">
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-3 text-cyan-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold text-blue-900">Premium BCDs & Regulators</div>
+                                <div class="text-gray-600">Latest models from Scubapro and Mares</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-3 text-cyan-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold text-blue-900">Nitrox Available</div>
+                                <div class="text-gray-600">Extended bottom time for certified divers</div>
+                            </div>
+                        </li>
+                        <li class="flex items-start">
+                            <svg class="w-6 h-6 mr-3 text-cyan-500 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                            <div>
+                                <div class="font-semibold text-blue-900">Emergency Oxygen</div>
+                                <div class="text-gray-600">On-board oxygen and first aid kits</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- Certifications & Standards -->
+            <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                <h3 class="text-3xl font-bold text-blue-900 mb-8 text-center">Certifications & Standards</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">PADI</span>
+                        </div>
+                        <div class="font-semibold text-gray-700">PADI 5-Star Center</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <span class="text-white text-2xl font-bold">SSI</span>
+                        </div>
+                        <div class="font-semibold text-gray-700">SSI Certified</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path>
+                            </svg>
+                        </div>
+                        <div class="font-semibold text-gray-700">DAN Insured</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-24 h-24 bg-cyan-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <svg class="w-12 h-12 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                            </svg>
+                        </div>
+                        <div class="font-semibold text-gray-700">ISO Certified</div>
+                    </div>
+                </div>
+                
+                <div class="mt-12 bg-gradient-to-r from-blue-50 to-cyan-50 rounded-xl p-6">
+                    <h4 class="text-xl font-bold text-blue-900 mb-4">Emergency Procedures</h4>
+                    <p class="text-gray-700 mb-4">
+                        All our dive masters are trained in emergency first response and rescue procedures. We maintain direct communication with local hyperbaric chambers and coast guard services. Every boat is equipped with emergency oxygen, first aid kits, and marine radio.
+                    </p>
+                    <p class="text-gray-700">
+                        <span class="font-semibold">Emergency Contact:</span> +1 (555) 123-4567 (24/7)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white scroll-reveal">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-blue-900 mb-4">Get In Touch</h2>
+                <p class="text-xl text-gray-600">Ready to start your underwater adventure?</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <!-- Contact Form -->
+                <div>
+                    <form id="contact-form" class="space-y-6">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                            <input type="text" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="John Doe" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                            <input type="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="john@example.com" required>
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                            <input type="tel" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="+1 (555) 123-4567">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea rows="5" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-cyan-500" placeholder="Tell us about your diving experience and what you're interested in..." required></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-cyan-500 hover:bg-cyan-600 text-white py-4 rounded-lg font-semibold text-lg transition-all transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+                
+                <!-- Contact Info & Map -->
+                <div>
+                    <div class="bg-gradient-to-br from-blue-50 to-cyan-50 rounded-2xl p-8 mb-8">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-6">Contact Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-cyan-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path>
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                                </svg>
+                                <div>
+                                    <div class="font-semibold text-blue-900">Address</div>
+                                    <div class="text-gray-700">123 Ocean Drive, Paradise Bay<br>Coastal City, CC 12345</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-cyan-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                                </svg>
+                                <div>
+                                    <div class="font-semibold text-blue-900">Phone</div>
+                                    <div class="text-gray-700">+1 (555) 123-4567</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-cyan-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path>
+                                </svg>
+                                <div>
+                                    <div class="font-semibold text-blue-900">WhatsApp</div>
+                                    <div class="text-gray-700">+1 (555) 987-6543</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-cyan-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                                </svg>
+                                <div>
+                                    <div class="font-semibold text-blue-900">Email</div>
+                                    <div class="text-gray-700">info@oceandepths.com</div>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <svg class="w-6 h-6 text-cyan-500 mr-3 flex-shrink-0 mt-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                                </svg>
+                                <div>
+                                    <div class="font-semibold text-blue-900">Opening Hours</div>
+                                    <div class="text-gray-700">Mon-Sun: 7:00 AM - 7:00 PM</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Google Maps Embed -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg h-64">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.2412648750455!2d-73.98823492346654!3d40.74844097138558!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c259a9b3117469%3A0xd134e199a405a163!2sEmpire%20State%20Building!5e0!3m2!1sen!2sus!4v1704901234567!5m2!1sen!2sus" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- Logo & Description -->
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <svg class="w-10 h-10 text-cyan-400" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z"/>
+                        </svg>
+                        <span class="text-2xl font-bold">Ocean Depths</span>
+                    </div>
+                    <p class="text-gray-300 mb-4">Your gateway to underwater adventures. PADI-certified diving center offering courses, fun dives, and snorkeling trips.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center hover:bg-cyan-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center hover:bg-cyan-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center hover:bg-cyan-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-cyan-500 rounded-full flex items-center justify-center hover:bg-cyan-400 transition-colors">
+                            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-300 hover:text-cyan-400 transition-colors">Home</a></li>
+                        <li><a href="#courses" class="text-gray-300 hover:text-cyan-400 transition-colors">Courses</a></li>
+                        <li><a href="#fun-dives" class="text-gray-300 hover:text-cyan-400 transition-colors">Fun Dives</a></li>
+                        <li><a href="#snorkeling" class="text-gray-300 hover:text-cyan-400 transition-colors">Snorkeling</a></li>
+                        <li><a href="#packages" class="text-gray-300 hover:text-cyan-400 transition-colors">Packages</a></li>
+                        <li><a href="#gallery" class="text-gray-300 hover:text-cyan-400 transition-colors">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Dive Sites -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Popular Dive Sites</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-300 hover:text-cyan-400 transition-colors">Coral Garden</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-cyan-400 transition-colors">Blue Abyss Wall</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-cyan-400 transition-colors">SS Neptune Wreck</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-cyan-400 transition-colors">Turtle Cove</a></li>
+                        <li><a href="#" class="text-gray-300 hover:text-cyan-400 transition-colors">Shark Point</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Opening Hours -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Opening Hours</h4>
+                    <ul class="space-y-2 text-gray-300">
+                        <li class="flex justify-between">
+                            <span>Monday - Friday</span>
+                            <span>7:00 AM - 7:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Saturday</span>
+                            <span>7:00 AM - 8:00 PM</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span>Sunday</span>
+                            <span>7:00 AM - 8:00 PM</span>
+                        </li>
+                    </ul>
+                    <div class="mt-6">
+                        <h5 class="font-semibold mb-2">Emergency 24/7</h5>
+                        <p class="text-cyan-400 font-bold">+1 (555) 123-4567</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-blue-800 pt-8 text-center text-gray-300">
+                <p>&copy; 2026 Ocean Depths Diving Center. All rights reserved. | <a href="#" class="hover:text-cyan-400 transition-colors">Privacy Policy</a> | <a href="#" class="hover:text-cyan-400 transition-colors">Terms & Conditions</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Sticky Mobile Booking Button -->
+    <div id="sticky-booking" class="sticky-booking md:hidden bg-gradient-to-r from-cyan-500 to-blue-600 p-4 shadow-2xl">
+        <button class="w-full bg-white text-cyan-600 py-3 rounded-lg font-bold text-lg">
+            Book Your Dive Now
+        </button>
+    </div>
+
+    <!-- Scroll to Top Button -->
+    <div id="scroll-to-top" class="scroll-to-top">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18"></path>
+        </svg>
+    </div>
+""
+
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMenuBtn = document.getElementById('close-menu-btn');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar Background on Scroll
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('shadow-xl');
+            } else {
+                navbar.classList.remove('shadow-xl');
+            }
+        });
+
+        // Scroll Reveal Animation
+        const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+        
+        const revealOnScroll = () => {
+            scrollRevealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); // Initial check
+
+        // Booking Form Validation
+        const bookingForm = document.getElementById('booking-form');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your booking request! We will contact you shortly to confirm availability.');
+            bookingForm.reset();
+        });
+
+        // Contact Form Validation
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you within 24 hours.');
+            contactForm.reset();
+        });
+
+        // Gallery Lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeLightbox = document.getElementById('close-lightbox');
+
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightbox.classList.add('active');
+                lightboxImg.src = item.src;
+            });
+        });
+
+        closeLightbox.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+
+        // Testimonial Slider
+        const testimonialTrack = document.querySelector('.testimonial-track');
+        const prevBtn = document.getElementById('prev-testimonial');
+        const nextBtn = document.getElementById('next-testimonial');
+        let currentSlide = 0;
+        const totalSlides = document.querySelectorAll('.testimonial-slide').length;
+
+        const updateSlider = () => {
+            testimonialTrack.style.transform = `translateX(-${currentSlide * 100}%)`;
+        };
+
+        nextBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        });
+
+        prevBtn.addEventListener('click', () => {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        });
+
+        // Auto-advance testimonials
+        setInterval(() => {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            updateSlider();
+        }, 5000);
+
+        // Dive Site Filter
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const diveSites = document.querySelectorAll('.dive-site');
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active button
+                filterBtns.forEach(b => {
+                    b.classList.remove('bg-cyan-500', 'text-white');
+                    b.classList.add('bg-gray-200', 'text-gray-700');
+                });
+                btn.classList.remove('bg-gray-200', 'text-gray-700');
+                btn.classList.add('bg-cyan-500', 'text-white');
+
+                // Filter dive sites
+                const filter = btn.getAttribute('data-filter');
+                diveSites.forEach(site => {
+                    if (filter === 'all' || site.getAttribute('data-category') === filter) {
+                        site.style.display = 'block';
+                    } else {
+                        site.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Scroll to Top Button
+        const scrollToTopBtn = document.getElementById('scroll-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('active');
+            } else {
+                scrollToTopBtn.classList.remove('active');
+            }
+        });
+
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Sticky Mobile Booking Button
+        const stickyBooking = document.getElementById('sticky-booking');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 800 && window.innerWidth < 768) {
+                stickyBooking.classList.add('active');
+            } else {
+                stickyBooking.classList.remove('active');
+            }
+        });
+
+        stickyBooking.addEventListener('click', () => {
+            document.getElementById('booking').scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+
+        // Set minimum date for booking form
+        const dateInput = document.querySelector('input[type="date"]');
+        if (dateInput) {
+            const today = new Date().toISOString().split('T')[0];
+            dateInput.setAttribute('min', today);
+        }
+    </script>
+</body>
+</html>

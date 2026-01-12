@@ -1,0 +1,999 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cambodia Wonderland - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <style>
+    html{
+            scroll-behavior: smooth;
+        }
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+        .popup-content {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 90%;
+            width: 500px;
+            z-index: 1001;
+        }
+        .close-button {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #ff4444;
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .countdown {
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #fff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        /* Live Demo Ribbon */
+        .live-demo-ribbon {
+            position: fixed;
+            top: 40px;
+            right: -100px;
+            width: 300px;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            text-transform: uppercase;
+        }
+  </style>
+</head>
+<body class="bg-gray-100">
+  <!-- Live Demo Ribbon -->
+  <div class="live-demo-ribbon">Live Demo</div>
+  <!-- Navigation -->
+    <nav class="bg-gray-800 text-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center">
+                        <img src="https://i.pinimg.com/736x/42/43/5f/42435f0006695de68800eaddf3529696.jpg" alt="Kampong Thom Province" class="h-8 w-auto">
+                        <span class="ml-2 text-xl font-bold">Wonder Of Cambodia</span>
+                    </a>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button type="button" onclick="toggleMenu()" class="text-gray-600 hover:text-gray-900 focus:outline-none">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+
+                <!-- Desktop menu -->
+                <div class="hidden md:flex items-center space-x-4">
+                    <a href="#" class="hover:text-gray-500 px-3 py-2 rounded-md text-sm font-medium font-bold">Home</a>
+                    <a href="#" class="hover:text-gray-500 px-3 py-2 rounded-md text-sm font-medium">Destinations</a>
+                    <a href="#" class="hover:text-gray-500 px-3 py-2 rounded-md text-sm font-medium">Tours</a>
+                    <a href="#" class="hover:text-gray-500 px-3 py-2 rounded-md text-sm font-medium">Travel Tips</a>
+                    <a href="#" class="hover:text-gray-500 px-3 py-2 rounded-md text-sm font-medium">About</a>
+                    <a href="#" class="hover:text-gray-500 px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+                </div>
+            </div>
+
+            <!-- Mobile menu -->
+            <div id="mobile-menu" class="hidden md:hidden">
+                <div class="px-2 pt-2 pb-3 space-y-1">
+                    <a href="#" class="block px-3 py-2 rounded-md hover:text-gray-500 hover:bg-gray-100 text-sm font-medium">Home</a>
+                    <a href="#" class="block px-3 py-2 rounded-md hover:text-gray-500 hover:bg-gray-100 text-sm font-medium">Destinations</a>
+                    <a href="#" class="block px-3 py-2 rounded-md hover:text-gray-500 hover:bg-gray-100 text-sm font-medium">Tours</a>
+                    <a href="#" class="block px-3 py-2 rounded-md hover:text-gray-500 hover:bg-gray-100 text-sm font-medium">Travel Tips</a>
+                    <a href="#" class="block px-3 py-2 rounded-md hover:text-gray-500 hover:bg-gray-100 text-sm font-medium">About</a>
+                    <a href="#" class="block px-3 py-2 rounded-md hover:text-gray-500 hover:bg-gray-100 text-sm font-medium">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+  <div class="relative">
+    <!-- Hero Section - Enhanced with better overlay and call-to-action -->
+    <div class="relative h-screen">
+        <img src="https://i.pinimg.com/736x/92/9c/81/929c81d0c69ec2c169eb1c9858fd1bbf.jpg" alt="Kampong Thom Temples" class="w-full h-full object-cover">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70 flex items-center justify-center">
+            <div class="text-center text-white max-w-4xl px-4">
+                <h1 class="text-5xl font-bold mb-4">Wonder of Cambodia</h1>
+                <p class="text-xl mb-8">Experience the magic of ancient temples, lush landscapes, and authentic Cambodian culture</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="#destinations" class="bg-yellow-500 text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-yellow-600 transition duration-300">
+                        Explore Destinations
+                    </a>
+                    <a href="#map" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-white/20 transition duration-300">
+                        View Map
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Ad Space - After Hero -->
+    <div class="max-w-7xl mx-auto px-4 py-4">
+        <div class="bg-gray-200 h-24 flex items-center justify-center relative">
+            <!-- Ad label -->
+            <div class="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs font-semibold px-2 py-1 rounded">
+                Ad
+            </div>
+            <a id="ad-link" href="https://i.pinimg.com/736x/75/ff/1b/75ff1bdf8f4233ef255302deb1d3c203.jpg" target="_blank">
+                <img id="ad-image" src="https://i.pinimg.com/736x/75/ff/1b/75ff1bdf8f4233ef255302deb1d3c203.jpg" alt="Advertisement" class="h-20 transition-opacity duration-500">
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const ads = [
+            {
+                image: 'https://i.pinimg.com/736x/75/ff/1b/75ff1bdf8f4233ef255302deb1d3c203.jpg',
+                link: 'https://i.pinimg.com/736x/75/ff/1b/75ff1bdf8f4233ef255302deb1d3c203.jpg'
+            },
+            {
+                image: 'https://i.pinimg.com/736x/f0/f9/e4/f0f9e45724771f16745ad3f6f640d3ce.jpg',
+                link: 'https://i.pinimg.com/736x/f0/f9/e4/f0f9e45724771f16745ad3f6f640d3ce.jpg'
+            },
+            {
+                image: 'https://i.pinimg.com/736x/13/2e/29/132e292c42753ac808d6c97b1cf2e410.jpg',
+                link: 'https://i.pinimg.com/736x/13/2e/29/132e292c42753ac808d6c97b1cf2e410.jpg'
+            }
+        ];
+
+        let currentAd = 0;
+        const adImage = document.getElementById('ad-image');
+        const adLink = document.getElementById('ad-link');
+
+        setInterval(() => {
+            currentAd = (currentAd + 1) % ads.length;
+            adImage.classList.add('opacity-0');
+            setTimeout(() => {
+                adImage.src = ads[currentAd].image;
+                adLink.href = ads[currentAd].link;
+                adImage.classList.remove('opacity-0');
+            }, 500); // match transition duration
+        }, 5000); // change ad every 5 seconds
+    </script>
+
+    <!-- About Kampong Thom Section - New -->
+    <div class="bg-amber-50 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Welcome to Cambodia</h2>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto my-4"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">The heart of Cambodia with ancient temples, scenic landscapes, and authentic cultural experiences awaiting your discovery.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-white rounded-lg p-6 shadow-md text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Rich History</h3>
+                    <p class="text-gray-600">Explore the pre-Angkorian temples and archaeological sites dating back to the 7th century.</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-md text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Natural Beauty</h3>
+                    <p class="text-gray-600">Discover stunning landscapes from lush forests to scenic mountains and the majestic Tonle Sap Lake.</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-6 shadow-md text-center">
+                    <div class="bg-yellow-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 15.546c-.523 0-1.046.151-1.5.454a2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.704 2.704 0 00-3 0 2.704 2.704 0 01-3 0 2.701 2.701 0 00-1.5-.454M9 6v2m3-2v2m3-2v2M9 3h.01M12 3h.01M15 3h.01M21 21v-7a2 2 0 00-2-2H5a2 2 0 00-2 2v7h18zm-3-9v-2a2 2 0 00-2-2H8a2 2 0 00-2 2v2h12z" />
+                        </svg>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cultural Experiences</h3>
+                    <p class="text-gray-600">Immerse yourself in authentic Cambodian culture through traditional villages, local cuisine, and crafts.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popular Destinations Section with anchor -->
+    <div id="destinations" class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800">Top Destinations in Kampong Thom</h2>
+            <div class="w-24 h-1 bg-yellow-500 mx-auto my-4"></div>
+            <p class="text-gray-600 max-w-3xl mx-auto">Explore these must-visit attractions that showcase the beauty and heritage of Kampong Thom province.</p>
+        </div>
+        
+        <div class="grid md:grid-cols-4 gap-8">
+            <!-- Main Content -->
+            <div class="md:col-span-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Sambor Prei Kuk -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <img src="https://i.pinimg.com/736x/34/80/62/348062ca1351014ef60061ebb84d61d0.jpg" alt="Sambor Prei Kuk" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Sambor Prei Kuk</h3>
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded">UNESCO Heritage</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Ancient temple city and UNESCO World Heritage site featuring over 100 pre-Angkorian temples dating to the 7th century.</p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>📍 Location: 30km from Kampong Thom town</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>⏰ Best Time: December to March</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>💲 Entry Fee: $10 for foreigners</span>
+                                </div>
+                            </div>
+                            <a href="/destination/sambor-prei-kuk" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Santuk Mountain -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <img src="https://i.pinimg.com/736x/ce/ea/b2/ceeab2261730ac7a16573138e4e5a611.jpg" alt="Santuk Mountain" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Santuk Mountain</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Nature & Spiritual</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Sacred mountain with ancient temples, reclining Buddha statues, and panoramic views of the countryside.</p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>📍 Location: 17km from Kampong Thom town</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>⏰ Best Time: October to April</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>💲 Entry Fee: $2 for foreigners</span>
+                                </div>
+                            </div>
+                            <a href="/destination/santuk-mountain" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Tonle Sap Lake -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <img src="https://i.pinimg.com/736x/ab/b4/ae/abb4aece7138c4fd39928001d903203e.jpg" alt="Tonle Sap" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Tonle Sap Lake</h3>
+                                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded">Natural Wonder</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">The largest freshwater lake in Southeast Asia with floating villages and rich biodiversity.</p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>📍 Location: Southern part of the province</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>⏰ Best Time: Wet Season (June-October)</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>🚣 Activities: Boat tours, birdwatching</span>
+                                </div>
+                            </div>
+                            <a href="/destination/tonle-sap" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Learn More</a>
+                        </div>
+                    </div>
+
+                    <!-- Prasat Andet -->
+                    <div class="bg-white rounded-lg overflow-hidden shadow-lg transition-transform duration-300 hover:shadow-xl hover:-translate-y-1">
+                        <img src="https://i.pinimg.com/736x/c2/f1/63/c2f16305e562b895a4884b81ddbf5fbd.jpg" alt="Prasat Andet" class="w-full h-64 object-cover">
+                        <div class="p-6">
+                            <div class="flex justify-between items-start mb-2">
+                                <h3 class="text-xl font-bold">Angkor Wat Temple</h3>
+                                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded">Historical</span>
+                            </div>
+                            <p class="text-gray-600 mb-4">Ancient temple complex dating back to the 8th century with unique stone carvings and architecture.</p>
+                            <div class="space-y-2 mb-4">
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>📍 Location: Near Kampong Svay district</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>⏰ Best Time: November to March</span>
+                                </div>
+                                <div class="flex items-center text-sm text-gray-500">
+                                    <span>💲 Entry Fee: Free</span>
+                                </div>
+                            </div>
+                            <a href="/destination/prasat-andet" class="inline-block bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition duration-300">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Map Section -->
+                <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDHQ3Jyi5l966vpyNcoTzXwBvPEOOicPUQ&callback=initMap" async defer></script>
+
+                <!-- Interactive Map Section -->
+                <!-- <div id="map" class="mt-12 bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-2xl font-bold mb-4">Kampong Thom Destination Map</h3>
+                    <p class="text-gray-600 mb-6">Explore the locations of key attractions in Kampong Thom province.</p> -->
+                    
+                    <!-- Map Container -->
+                    <!-- <div class="bg-gray-200 rounded-lg h-96 relative overflow-hidden">
+                        <div id="googleMap" class="w-full h-full"></div>
+                    </div> -->
+                    
+                    <!-- Map Legend -->
+                    <!-- <div class="mt-4 grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-red-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Temples</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Natural Attractions</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-green-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Cultural Sites</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                            <span class="text-sm">Accommodations</span>
+                        </div>
+                    </div>
+                </div> -->
+
+                <!-- <script>
+                    function initMap() {
+                        // Center the map on Kampong Thom province, Cambodia
+                        const kampongThom = { lat: 12.7111, lng: 104.8887 };
+                        const map = new google.maps.Map(document.getElementById("googleMap"), {
+                            zoom: 10,
+                            center: kampongThom,
+                            mapTypeId: "roadmap", // Options: 'roadmap', 'satellite', 'hybrid', 'terrain'
+                        });
+
+                        // Sample markers for different attraction types
+                        const markers = [
+                            {
+                                position: { lat: 12.8690395, lng: 105.0160699 },
+                                title: "Prasat Sambor Prei Kuk",
+                                type: "Temples",
+                                icon: {
+                                    url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                },
+                            },
+                            {
+                                position: { lat: 12.7738661, lng: 104.9419395 },
+                                title: "Wat Prasat Noren Enkoma",
+                                type: "Temples",
+                                icon: {
+                                    url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+                                },
+                            },
+                            {
+                                position: { lat: 12.6447983, lng: 105.0023792 },
+                                title: "Phnom Santuk",
+                                type: "Natural Attractions",
+                                icon: {
+                                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                },
+                            },
+                            {
+                                position: { lat: 12.7187549, lng: 104.9211373 },
+                                title: "Sampow Trailok Traileak",
+                                type: "Cultural Sites",
+                                icon: {
+                                    url: "http://maps.google.com/mapfiles/ms/icons/blue-dot.png",
+                                },
+                            },                            
+                            {
+                                position: { lat: 12.7000, lng: 104.9000 },
+                                title: "Kampong Thom Village",
+                                type: "Cultural Sites",
+                                icon: {
+                                    url: "http://maps.google.com/mapfiles/ms/icons/green-dot.png",
+                                },
+                            },
+                            {
+                                position: { lat: 12.7099934, lng: 104.8860175 },
+                                title: "Kampong Thom Palace Hotel & restaurant",
+                                type: "Accommodations",
+                                icon: {
+                                    url: "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png",
+                                },
+                            },
+                        ];
+
+                        // Add markers to the map
+                        markers.forEach((markerInfo) => {
+                            const marker = new google.maps.Marker({
+                                position: markerInfo.position,
+                                map: map,
+                                title: markerInfo.title,
+                                icon: markerInfo.icon,
+                            });
+
+                            // Add info window for each marker
+                            const infoWindow = new google.maps.InfoWindow({
+                                content: `<div><strong>${markerInfo.title}</strong><br>Type: ${markerInfo.type}</div>`,
+                            });
+
+                            marker.addListener("click", () => {
+                                infoWindow.open(map, marker);
+                            });
+                        });
+                    }
+                </script> -->
+
+                <section class="py-16">
+                    <div class="container mx-auto px-6">
+                        <h2 class="text-3xl font-bold text-center text-gray-800 mb-4">Explore Our Destinations</h2>
+                        <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">Discover the best dirt biking spots, accommodations, dining, and historical sites in Kampong Thom on the map below.</p>
+                        <div id="map" class="h-96 w-full rounded-lg shadow-md"></div>
+                    </div>
+                </section>
+                <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+                <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+                <script>
+                    // Initialize the map, centered on Kampong Thom
+                    var map = L.map('map').setView([12.7110, 104.8887], 8);
+
+                    // Add OpenStreetMap tiles
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    // Define custom icons for categories
+                    var templeIcon = L.divIcon({
+                        html: '<i class="fas fa-place-of-worship" style="color: #D32F2F; font-size: 24px;"></i>',
+                        iconSize: [24, 24],
+                        className: 'custom-icon'
+                    });
+
+                    var naturalIcon = L.divIcon({
+                        html: '<i class="fas fa-tree" style="color: #388E3C; font-size: 24px;"></i>',
+                        iconSize: [24, 24],
+                        className: 'custom-icon'
+                    });
+
+                    var accommodationIcon = L.divIcon({
+                        html: '<i class="fas fa-hotel" style="color: #0288D1; font-size: 24px;"></i>',
+                        iconSize: [24, 24],
+                        className: 'custom-icon'
+                    });
+
+                    var foodIcon = L.divIcon({
+                        html: '<i class="fas fa-utensils" style="color: #FBC02D; font-size: 24px;"></i>',
+                        iconSize: [24, 24],
+                        className: 'custom-icon'
+                    });
+
+                    var historicalIcon = L.divIcon({
+                        html: '<i class="fas fa-monument" style="color: #8E24AA; font-size: 24px;"></i>',
+                        iconSize: [24, 24],
+                        className: 'custom-icon'
+                    });
+
+                    // Define layer groups for categories
+                    var temples = L.layerGroup([
+                        L.marker([12.871059, 105.0407466], { icon: templeIcon }).bindPopup('Sambor Prei Kuk - UNESCO World Heritage Site'),
+                        L.marker([12.652146, 104.9858089], { icon: templeIcon }).bindPopup('Phnom Santuk - Temple with scenic views'),
+                        L.marker([13.4124693, 103.8644108], { icon: templeIcon }).bindPopup('Angkor Wat Temple - Iconic temple near Siem Reap'),
+                        L.marker([12.7909425, 104.7180451], { icon: templeIcon }).bindPopup('Andet Temple - Ancient Khmer site')
+                    ]);
+
+                    var naturalSites = L.layerGroup([
+                        L.marker([12.9667, 105.4667], { icon: naturalIcon }).bindPopup('Prey Lang Wildlife Sanctuary - Biodiverse forest')
+                    ]);
+
+                    var accommodations = L.layerGroup([
+                        L.marker([12.7112101, 104.8909209], { icon: accommodationIcon }).bindPopup('Kampong Thom Royal Hotel - 5-star with city views, pool, and skybar'),
+                        L.marker([12.7107828, 104.8951169], { icon: accommodationIcon }).bindPopup('Sambor Village Hotel - Boutique stay with pool'),
+                        L.marker([12.7101428, 104.8888689], { icon: accommodationIcon }).bindPopup('Kampong Thom Palace Hotel - 4-star with city views')
+                    ]);
+
+                    var localDishes = L.layerGroup([
+                        L.marker([12.7095539,104.8895445], { icon: foodIcon }).bindPopup('Kompong Thom Street Food'),
+                        L.marker([12.7107828, 104.8951169], { icon: foodIcon }).bindPopup('Sambor Village Restaurant - Khmer red curry and ice cream')
+                    ]);
+
+                    var historicalSites = L.layerGroup([
+                        L.marker([12.8715, 105.0410], { icon: historicalIcon }).bindPopup('Prasat Yeah Puon Group - Pre-Angkorian sanctuaries'),
+                        L.marker([12.6500, 104.9800], { icon: historicalIcon }).bindPopup('Ka Kos Village - Stone handicraft artisans'),
+                        L.marker([12.7271999, 104.8883573], { icon: historicalIcon }).bindPopup('Kampong Thom Museum')
+                    ]);
+
+                    // Add layers to the map by default
+                    temples.addTo(map);
+                    naturalSites.addTo(map);
+                    accommodations.addTo(map);
+                    localDishes.addTo(map);
+                    historicalSites.addTo(map);
+
+                    // Add layer control to toggle categories
+                    var overlayMaps = {
+                        "Temples": temples,
+                        "Natural Sites": naturalSites,
+                        "Accommodations": accommodations,
+                        "Local Dishes": localDishes,
+                        "Historical Sites": historicalSites
+                    };
+                    L.control.layers(null, overlayMaps, { collapsed: false }).addTo(map);
+
+                    // Fit map bounds to show all markers
+                    var allMarkers = L.featureGroup([temples, naturalSites, accommodations, localDishes, historicalSites]);
+                    map.fitBounds(allMarkers.getBounds().pad(0.2));
+                </script>
+
+            </div>
+
+            <!-- Sidebar -->
+            <div class="space-y-8">
+                <!-- Ad Space -->
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <div class="bg-gray-200 h-96 flex items-center justify-center relative overflow-hidden rounded-md">
+                        <!-- Ad label -->
+                        <div class="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs font-semibold px-2 py-1 rounded">
+                            Ad
+                        </div>
+
+                        <!-- Ad image -->
+                        <a id="ad-link-2" href="https://i.pinimg.com/736x/83/db/d7/83dbd7f7280dfc187f7ca1d1b06cf2a0.jpg" target="_blank" class="w-full h-full">
+                            <img id="ad-image-2" 
+                                src="https://i.pinimg.com/736x/83/db/d7/83dbd7f7280dfc187f7ca1d1b06cf2a0.jpg" 
+                                alt="Advertisement" 
+                                class="w-full h-full object-cover transition-opacity duration-500">
+                        </a>
+                    </div>
+                </div>
+
+                <script>
+                    const ads2 = [
+                        {
+                            image: 'https://i.pinimg.com/736x/89/fd/6f/89fd6fc0e7b086b021cde4af12ef6dd3.jpg',
+                            link: 'https://i.pinimg.com/736x/89/fd/6f/89fd6fc0e7b086b021cde4af12ef6dd3.jpg'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/03/83/5e/03835e796e0911b738a34aa20a2e1749.jpg',
+                            link: 'https://i.pinimg.com/736x/03/83/5e/03835e796e0911b738a34aa20a2e1749.jpg'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/7c/51/b6/7c51b6b4109f6b1bc7ceb7026e29d71b.jpg',
+                            link: 'https://i.pinimg.com/736x/7c/51/b6/7c51b6b4109f6b1bc7ceb7026e29d71b.jpg'
+                        }
+                    ];
+
+                    let currentAd2 = 0;
+                    const adImage2 = document.getElementById('ad-image-2');
+                    const adLink2 = document.getElementById('ad-link-2');
+
+                    setInterval(() => {
+                        currentAd2 = (currentAd2 + 1) % ads2.length;
+                        adImage2.classList.add('opacity-0');
+                        setTimeout(() => {
+                            adImage2.src = ads2[currentAd2].image;
+                            adLink2.href = ads2[currentAd2].link;
+                            adImage2.classList.remove('opacity-0');
+                        }, 500);
+                    }, 5000);
+                </script>
+
+                <!-- Travel Planning Tools - New -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Travel Tools</h3>
+                    
+                    <!-- Weather Widget -->
+                    <div class="mb-4 p-4 bg-blue-50 rounded-lg">
+                        <h4 class="font-semibold mb-2">Current Weather</h4>
+                        <div class="flex items-center">
+                            <div class="text-4xl text-blue-500 mr-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold">32°C</div>
+                                <div class="text-sm text-gray-600">Kampong Thom City</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Best Time to Visit -->
+                    <div class="mb-4">
+                        <h4 class="font-semibold mb-2">Best Time to Visit</h4>
+                        <p class="text-sm text-gray-600">November to February: Dry season with cooler temperatures, ideal for temple exploration.</p>
+                    </div>
+                    
+                    <!-- Getting There -->
+                    <div>
+                        <h4 class="font-semibold mb-2">Getting There</h4>
+                        <p class="text-sm text-gray-600">Kampong Thom is easily accessible by bus from Phnom Penh (3 hours) or Siem Reap (2.5 hours).</p>
+                    </div>
+                </div>
+
+                <!-- Popular Articles -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">Latest Articles</h3>
+                    <ul class="space-y-3">
+                        <li class="pb-2 border-b border-gray-100">
+                            <a href="#" class="flex items-start">
+                                <img src="https://i.pinimg.com/736x/11/93/de/1193de7436de33159abb82dd621a506b.jpg" alt="Article thumbnail" class="w-16 h-12 object-cover rounded mr-3">
+                                <div>
+                                    <h4 class="text-yellow-600 hover:text-yellow-700 font-medium">The Hidden Temples of Kampong Thom</h4>
+                                    <p class="text-xs text-gray-500">May 15, 2025</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="pb-2 border-b border-gray-100">
+                            <a href="#" class="flex items-start">
+                                <img src="https://i.pinimg.com/736x/11/93/de/1193de7436de33159abb82dd621a506b.jpg" alt="Article thumbnail" class="w-16 h-12 object-cover rounded mr-3">
+                                <div>
+                                    <h4 class="text-yellow-600 hover:text-yellow-700 font-medium">Local Food Guide: Must-Try Dishes</h4>
+                                    <p class="text-xs text-gray-500">May 8, 2025</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" class="flex items-start">
+                                <img src="https://i.pinimg.com/736x/11/93/de/1193de7436de33159abb82dd621a506b.jpg" alt="Article thumbnail" class="w-16 h-12 object-cover rounded mr-3">
+                                <div>
+                                    <h4 class="text-yellow-600 hover:text-yellow-700 font-medium">Exploring Santuk Mountain's Secrets</h4>
+                                    <p class="text-xs text-gray-500">April 29, 2025</p>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="mt-4 text-center">
+                        <a href="/blog" class="text-yellow-600 hover:text-yellow-700 text-sm font-medium">View All Articles →</a>
+                    </div>
+                </div>
+
+                <!-- Bottom Ad Space -->
+                <div class="bg-white rounded-lg shadow-lg p-4">
+                    <div class="bg-gray-200 h-96 flex items-center justify-center relative overflow-hidden rounded-md">
+                        <!-- Ad label -->
+                        <div class="absolute top-2 left-2 bg-black bg-opacity-60 text-white text-xs font-semibold px-2 py-1 rounded">
+                            Ad
+                        </div>
+                        <a id="ad-link-3" href="https://i.pinimg.com/736x/35/1b/dc/351bdc436dccda23d5be7aa4698a81e2.jpg" target="_blank" class="w-full h-full">
+                            <img id="ad-image-3" 
+                                src="https://i.pinimg.com/736x/35/1b/dc/351bdc436dccda23d5be7aa4698a81e2.jpg" 
+                                alt="Advertisement" 
+                                class="w-full h-full object-cover transition-opacity duration-500">
+                        </a>
+                    </div>
+                </div>
+
+                <script>
+                    const ads3 = [
+                        {
+                            image: 'https://i.pinimg.com/736x/0a/6d/b5/0a6db55906382a1494ef0a55506810a8.jpg',
+                            link: 'https://i.pinimg.com/736x/0a/6d/b5/0a6db55906382a1494ef0a55506810a8.jpg'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/bd/d3/08/bdd30850192bf6ffb5d70907a5f65963.jpg',
+                            link: 'https://i.pinimg.com/736x/bd/d3/08/bdd30850192bf6ffb5d70907a5f65963.jpg'
+                        },
+                        {
+                            image: 'https://i.pinimg.com/736x/35/1b/dc/351bdc436dccda23d5be7aa4698a81e2.jpg',
+                            link: 'https://i.pinimg.com/736x/35/1b/dc/351bdc436dccda23d5be7aa4698a81e2.jpg'
+                        }
+                    ];
+
+                    let currentAd3 = 0;
+                    const adImage3 = document.getElementById('ad-image-3');
+                    const adLink3 = document.getElementById('ad-link-3');
+
+                    setInterval(() => {
+                        currentAd3 = (currentAd3 + 1) % ads3.length;
+                        adImage3.classList.add('opacity-0');
+                        setTimeout(() => {
+                            adImage3.src = ads3[currentAd3].image;
+                            adLink3.href = ads3[currentAd3].link;
+                            adImage3.classList.remove('opacity-0');
+                        }, 500);
+                    }, 5000);
+                </script>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section - New -->
+    <div class="bg-gray-100 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">Visitor Experiences</h2>
+                <div class="w-24 h-1 bg-yellow-500 mx-auto my-4"></div>
+                <p class="text-gray-600 max-w-3xl mx-auto">Read what other travelers have to say about their adventures in Kampong Thom.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Testimonial 1 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Sambor Prei Kuk was an incredible experience! So much less crowded than Angkor Wat but equally impressive. The ancient trees growing through the temples create a magical atmosphere."</p>
+                    <div class="flex items-center">
+                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Sarah Johnson</h4>
+                            <p class="text-sm text-gray-500">From Australia</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 2 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-500">5.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Climbing Santuk Mountain was a highlight of our Cambodia trip. The view from the top is breathtaking, and the reclining Buddha statues carved into the mountain are impressive."</p>
+                    <div class="flex items-center">
+                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Michael Chen</h4>
+                            <p class="text-sm text-gray-500">From Singapore</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Testimonial 3 -->
+                <div class="bg-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center mb-4">
+                        <div class="text-yellow-500">
+                            <span>★</span><span>★</span><span>★</span><span>★</span><span>☆</span>
+                        </div>
+                        <span class="ml-2 text-sm text-gray-500">4.0</span>
+                    </div>
+                    <p class="text-gray-600 mb-6 italic">"Our boat tour on Tonle Sap Lake was fascinating. We saw floating villages and learned about local fishing methods. Bring sunscreen and water as it gets very hot on the boat!"</p>
+                    <div class="flex items-center">
+                        <img src="/api/placeholder/48/48" alt="User" class="w-10 h-10 rounded-full mr-4">
+                        <div>
+                            <h4 class="font-semibold">Luisa Garcia</h4>
+                            <p class="text-sm text-gray-500">From Spain</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Photo Gallery - New -->
+    <div class="max-w-7xl mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800">Photo Gallery</h2>
+            <div class="w-24 h-1 bg-yellow-500 mx-auto my-4"></div>
+            <p class="text-gray-600 max-w-3xl mx-auto">Experience the beauty of Kampong Thom through these stunning photographs.</p>
+        </div>
+        
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/53/45/23/534523c9b169bc7008f343f8dc16c666.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/40/3f/2b/403f2b1fd9d5adae1365b0c2d2446fb8.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/e0/87/ea/e087ea3f7e149a124f77b07fefb414e9.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/d3/8a/6a/d38a6a5f5e11a0a82f0f72c03c718152.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/d5/0d/0c/d50d0cfbb0cba6c0b8401b8f225ba88e.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/88/18/00/8818004f34f1f311d119c71f62546397.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/fa/f6/00/faf600b3f8311d21c35c9cab1cbce590.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+            <div class="aspect-w-1 aspect-h-1">
+                <img src="https://i.pinimg.com/736x/e8/b6/76/e8b6765738575d6ff933a7b429e4e936.jpg" alt="Gallery image" class="w-full h-full object-cover rounded-lg">
+            </div>
+        </div>
+        
+        <div class="text-center mt-8">
+            <a href="/gallery" class="inline-block bg-yellow-500 text-white px-6 py-3 rounded-full hover:bg-yellow-600 transition duration-300">View Full Gallery</a>
+        </div>
+    </div>
+
+    <!-- Newsletter Signup - New -->
+    <div class="bg-yellow-500 py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="bg-white rounded-lg shadow-xl p-8 md:p-12 md:flex items-center justify-between">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Get Travel Updates</h3>
+                    <p class="text-gray-600">Subscribe to our newsletter and receive the latest news, travel tips, and exclusive offers for Kampong Thom.</p>
+                </div>
+                <div class="md:w-2/5">
+                    <form class="flex flex-col md:flex-row">
+                        <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 mb-2 md:mb-0 md:mr-2 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-yellow-500">
+                        <button type="submit" class="bg-yellow-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-yellow-600 transition duration-300">Subscribe</button>
+                    </form>
+                    <p class="text-xs text-gray-500 mt-2">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FAQ Section - New -->
+    <div class="max-w-4xl mx-auto px-4 py-16">
+        <div class="text-center mb-12">
+            <h2 class="text-3xl font-bold text-gray-800">Frequently Asked Questions</h2>
+            <div class="w-24 h-1 bg-yellow-500 mx-auto my-4"></div>
+            <p class="text-gray-600">Find answers to commonly asked questions about visiting Kampong Thom.</p>
+        </div>
+        
+        <div class="space-y-4">
+            <!-- FAQ Item 1 -->
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="flex items-center justify-between w-full p-4 text-left bg-white hover:bg-gray-50" onclick="toggleFAQ(this)">
+                    <span class="font-semibold">How do I get to Kampong Thom?</span>
+                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden p-4 pt-0 bg-white">
+                    <p class="text-gray-600">You can reach Kampong Thom by bus from Phnom Penh (approximately 3 hours) or from Siem Reap (approximately 2.5 hours). There are regular bus services throughout the day from both cities. Private taxis are also available for more flexibility.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 2 -->
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="flex items-center justify-between w-full p-4 text-left bg-white hover:bg-gray-50" onclick="toggleFAQ(this)">
+                    <span class="font-semibold">What's the best time to visit Sambor Prei Kuk?</span>
+                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden p-4 pt-0 bg-white">
+                    <p class="text-gray-600">The best time to visit Sambor Prei Kuk is during the dry season from November to March. Early morning (before 10 AM) or late afternoon (after 3 PM) provide the most comfortable temperatures and the best lighting for photography.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 3 -->
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="flex items-center justify-between w-full p-4 text-left bg-white hover:bg-gray-50" onclick="toggleFAQ(this)">
+                    <span class="font-semibold">Are there accommodation options in Kampong Thom?</span>
+                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden p-4 pt-0 bg-white">
+                    <p class="text-gray-600">Yes, Kampong Thom offers several accommodation options ranging from budget guesthouses to mid-range hotels. Most accommodations are located in Kampong Thom city, which serves as a good base for exploring the surrounding attractions.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Item 4 -->
+            <div class="border border-gray-200 rounded-lg overflow-hidden">
+                <button class="flex items-center justify-between w-full p-4 text-left bg-white hover:bg-gray-50" onclick="toggleFAQ(this)">
+                    <span class="font-semibold">How long should I spend in Kampong Thom?</span>
+                    <svg class="w-5 h-5 transform transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="hidden p-4 pt-0 bg-white">
+                    <p class="text-gray-600">We recommend spending at least 2-3 days in Kampong Thom to fully explore the major attractions including Sambor Prei Kuk, Santuk Mountain, and the surrounding cultural sites. If you plan to visit Tonle Sap Lake, add an extra day to your itinerary.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleFAQ(element) {
+            // Toggle the hidden content
+            const content = element.nextElementSibling;
+            content.classList.toggle('hidden');
+            
+            // Toggle the icon rotation
+            const icon = element.querySelector('svg');
+            icon.classList.toggle('rotate-180');
+        }
+    </script>
+
+    <!-- Call to Action - New -->
+    <div class="bg-yellow-500 py-16">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Ready to Explore Kampong Thom?</h2>
+            <p class="text-xl text-white mb-8 max-w-3xl mx-auto">Discover the hidden treasures of Cambodia's heartland with its ancient temples, natural beauty, and authentic culture.</p>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="/destinations" class="bg-white text-yellow-600 px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-100 transition duration-300">
+                    Explore All Destinations
+                </a>
+                <a href="/gallery" class="bg-transparent border-2 border-white text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-white/20 transition duration-300">
+                    View Photo Gallery
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <!-- Footer -->
+    <footer class="bg-gray-800 text-white">
+        <div class="max-w-7xl mx-auto px-4 py-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4">About Us</h3>
+                    <p class="text-gray-300">Discover the beauty of Cambodia with our expertly curated tours and travel experiences.</p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="/destinations" class="text-gray-300 hover:text-white">Popular Destinations</a></li>
+                        <li><a href="/tours" class="text-gray-300 hover:text-white">Featured Tours</a></li>
+                        <li><a href="/booking" class="text-gray-300 hover:text-white">Book Now</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Contact</h3>
+                    <ul class="space-y-2 text-gray-300">
+                        <li><i class="fas fa-phone mr-2"></i> +855 XX XXX XXX</li>
+                        <li><i class="fas fa-envelope mr-2"></i> info@cambodiatours.com</li>
+                        <li><i class="fas fa-map-marker-alt mr-2"></i> Phnom Penh, Cambodia</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Follow Us</h3>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-300 hover:text-white"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script>
+        function toggleMenu() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        }
+    </script>
+</body>
+</html>

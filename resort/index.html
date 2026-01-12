@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Azure Paradise Resort | Luxury Beach Resort</title>
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Custom Tailwind Configuration */
+        @layer base {
+            body {
+                font-family: 'Poppins', sans-serif;
+            }
+            h1, h2, h3, h4, h5, h6 {
+                font-family: 'Playfair Display', serif;
+            }
+        }
+        
+        /* Custom Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in-up {
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        /* Glassmorphism Effect */
+        .glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Parallax Effect */
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+        }
+        
+        .lightbox.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* Live Demo Ribbon */
+        .live-demo-ribbon {
+            position: fixed;
+            top: 40px;
+            right: -100px;
+            width: 300px;
+            background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+            color: white;
+            text-align: center;
+            padding: 12px 0;
+            font-weight: bold;
+            font-size: 16px;
+            letter-spacing: 2px;
+            transform: rotate(45deg);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+            text-transform: uppercase;
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.6s ease-out;
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800">
+    <!-- Live Demo Ribbon -->
+    <div class="live-demo-ribbon">Live Demo</div>
+
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <!-- Logo -->
+                <div class="text-white">
+                    <h1 class="text-3xl font-bold tracking-wider">
+                        <i class="fas fa-umbrella-beach text-amber-400"></i> Azure Paradise
+                    </h1>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex items-center space-x-8">
+                    <a href="#home" class="text-white hover:text-amber-400 transition font-medium">Home</a>
+                    <a href="#about" class="text-white hover:text-amber-400 transition font-medium">About</a>
+                    <a href="#rooms" class="text-white hover:text-amber-400 transition font-medium">Rooms & Villas</a>
+                    <a href="#experiences" class="text-white hover:text-amber-400 transition font-medium">Experiences</a>
+                    <a href="#gallery" class="text-white hover:text-amber-400 transition font-medium">Gallery</a>
+                    <a href="#offers" class="text-white hover:text-amber-400 transition font-medium">Offers</a>
+                    <a href="#contact" class="text-white hover:text-amber-400 transition font-medium">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-white text-2xl">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden lg:hidden bg-white shadow-lg">
+            <div class="container mx-auto px-6 py-4 flex flex-col space-y-4">
+                <a href="#home" class="text-gray-800 hover:text-amber-600 transition font-medium">Home</a>
+                <a href="#about" class="text-gray-800 hover:text-amber-600 transition font-medium">About</a>
+                <a href="#rooms" class="text-gray-800 hover:text-amber-600 transition font-medium">Rooms & Villas</a>
+                <a href="#experiences" class="text-gray-800 hover:text-amber-600 transition font-medium">Experiences</a>
+                <a href="#gallery" class="text-gray-800 hover:text-amber-600 transition font-medium">Gallery</a>
+                <a href="#offers" class="text-gray-800 hover:text-amber-600 transition font-medium">Offers</a>
+                <a href="#contact" class="text-gray-800 hover:text-amber-600 transition font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative h-screen parallax" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=1920');">
+        <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center text-white fade-in-up px-6">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 tracking-wide">Azure Paradise Resort</h1>
+                <p class="text-xl md:text-2xl mb-10 font-light tracking-wider">Where Paradise Meets Comfort</p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <a href="#booking" class="bg-amber-500 hover:bg-amber-600 text-white px-8 py-4 rounded-full text-lg font-semibold transition transform hover:scale-105">
+                        Book Your Stay
+                    </a>
+                    <a href="#rooms" class="bg-transparent border-2 border-white hover:bg-white hover:text-gray-800 text-white px-8 py-4 rounded-full text-lg font-semibold transition">
+                        Explore Rooms
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Scroll Down Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white text-3xl"></i>
+        </div>
+    </section>
+
+    <!-- Booking Bar -->
+    <section id="booking" class="relative -mt-20 z-40">
+        <div class="container mx-auto px-6">
+            <div class="glass rounded-2xl p-6 md:p-8 shadow-2xl">
+                <form id="booking-form" class="grid grid-cols-1 md:grid-cols-5 gap-4">
+                    <div>
+                        <label class="block text-white text-sm font-semibold mb-2">Check-in</label>
+                        <input type="date" id="checkin" required class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm font-semibold mb-2">Check-out</label>
+                        <input type="date" id="checkout" required class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm font-semibold mb-2">Guests</label>
+                        <select id="guests" required class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="">Select</option>
+                            <option value="1">1 Guest</option>
+                            <option value="2">2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                            <option value="5+">5+ Guests</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-white text-sm font-semibold mb-2">Room Type</label>
+                        <select id="roomtype" required class="w-full px-4 py-3 rounded-lg bg-white/90 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                            <option value="">Select</option>
+                            <option value="deluxe">Deluxe Room</option>
+                            <option value="suite">Ocean Suite</option>
+                            <option value="villa">Beach Villa</option>
+                            <option value="presidential">Presidential Suite</option>
+                        </select>
+                    </div>
+                    <div class="flex items-end">
+                        <button type="submit" class="w-full bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold transition transform hover:scale-105">
+                            Check Availability
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gradient-to-b from-white to-blue-50">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Left: Story -->
+                <div class="reveal">
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 text-gray-800">Welcome to Paradise</h2>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
+                        Nestled on the pristine shores of a tropical island, Azure Paradise Resort offers an unparalleled escape from the ordinary. Our commitment to excellence and attention to detail ensures every moment of your stay is nothing short of extraordinary.
+                    </p>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        Experience the perfect blend of luxury, nature, and tranquility. From our world-class amenities to our personalized service, we create memories that last a lifetime.
+                    </p>
+                    
+                    <!-- Highlights -->
+                    <div class="grid grid-cols-3 gap-6 mb-8">
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-amber-600 mb-2">15+</div>
+                            <div class="text-sm text-gray-600">Years Experience</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-amber-600 mb-2">50+</div>
+                            <div class="text-sm text-gray-600">Luxury Villas</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-4xl font-bold text-amber-600 mb-2">98%</div>
+                            <div class="text-sm text-gray-600">Guest Satisfaction</div>
+                        </div>
+                    </div>
+                    
+                    <a href="#rooms" class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full font-semibold transition">
+                        Discover More
+                    </a>
+                </div>
+                
+                <!-- Right: Image -->
+                <div class="reveal">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=800" alt="Resort View" class="rounded-2xl shadow-2xl w-full h-[500px] object-cover">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rooms & Villas Section -->
+    <section id="rooms" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Rooms & Villas</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Choose from our selection of elegantly designed accommodations, each offering breathtaking views and luxurious comfort.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Room Card 1 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600" alt="Deluxe Room" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-amber-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Popular
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Deluxe Ocean Room</h3>
+                        <p class="text-gray-600 mb-4">Spacious room with stunning ocean views and modern amenities.</p>
+                        <div class="flex items-center gap-3 mb-4 text-gray-600">
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-snowflake"></i>
+                            <i class="fas fa-water"></i>
+                            <i class="fas fa-tv"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-3xl font-bold text-amber-600">$299</span>
+                                <span class="text-gray-600">/night</span>
+                            </div>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room Card 2 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=600" alt="Ocean Suite" class="w-full h-64 object-cover">
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Ocean Suite</h3>
+                        <p class="text-gray-600 mb-4">Luxurious suite with private balcony and panoramic sea views.</p>
+                        <div class="flex items-center gap-3 mb-4 text-gray-600">
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-snowflake"></i>
+                            <i class="fas fa-water"></i>
+                            <i class="fas fa-hot-tub"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-3xl font-bold text-amber-600">$499</span>
+                                <span class="text-gray-600">/night</span>
+                            </div>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Room Card 3 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden transform hover:scale-105 transition duration-300">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=600" alt="Beach Villa" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 right-4 bg-green-500 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                            Best Value
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-800">Beach Villa</h3>
+                        <p class="text-gray-600 mb-4">Private villa with direct beach access and infinity pool.</p>
+                        <div class="flex items-center gap-3 mb-4 text-gray-600">
+                            <i class="fas fa-wifi"></i>
+                            <i class="fas fa-snowflake"></i>
+                            <i class="fas fa-swimming-pool"></i>
+                            <i class="fas fa-umbrella-beach"></i>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-3xl font-bold text-amber-600">$799</span>
+                                <span class="text-gray-600">/night</span>
+                            </div>
+                            <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full font-semibold transition">
+                                View Details
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experiences Section -->
+    <section id="experiences" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Experiences & Activities</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Immerse yourself in unforgettable experiences designed to rejuvenate your mind, body, and soul.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Experience 1 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600" alt="Spa" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <i class="fas fa-spa text-3xl mb-2"></i>
+                            <h3 class="text-2xl font-bold">Luxury Spa</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">Indulge in world-class spa treatments and wellness therapies.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 2 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600" alt="Island Tours" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <i class="fas fa-island-tropical text-3xl mb-2"></i>
+                            <h3 class="text-2xl font-bold">Island Tours</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">Explore hidden gems and breathtaking landscapes of our island.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 3 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600" alt="Snorkeling" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <i class="fas fa-fish text-3xl mb-2"></i>
+                            <h3 class="text-2xl font-bold">Snorkeling & Diving</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">Discover vibrant coral reefs and marine life in crystal-clear waters.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 4 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600" alt="Sunset Cruise" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <i class="fas fa-ship text-3xl mb-2"></i>
+                            <h3 class="text-2xl font-bold">Sunset Cruise</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">Sail into the sunset with champagne and stunning ocean views.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 5 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600" alt="Yoga" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <i class="fas fa-om text-3xl mb-2"></i>
+                            <h3 class="text-2xl font-bold">Yoga & Wellness</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">Find inner peace with beachfront yoga and meditation sessions.</p>
+                    </div>
+                </div>
+                
+                <!-- Experience 6 -->
+                <div class="reveal bg-white rounded-2xl shadow-lg overflow-hidden group cursor-pointer">
+                    <div class="relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600" alt="Fine Dining" class="w-full h-64 object-cover transform group-hover:scale-110 transition duration-500">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                        <div class="absolute bottom-4 left-4 text-white">
+                            <i class="fas fa-utensils text-3xl mb-2"></i>
+                            <h3 class="text-2xl font-bold">Fine Dining</h3>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-gray-600">Savor exquisite cuisine crafted by world-renowned chefs.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section id="offers" class="py-20 bg-gradient-to-r from-blue-600 to-blue-800 text-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4">Special Offers</h2>
+                <p class="text-lg max-w-2xl mx-auto opacity-90">Take advantage of our exclusive deals and seasonal promotions.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Offer 1 -->
+                <div class="reveal bg-white text-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=600" alt="Summer Offer" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 left-4 bg-red-500 text-white px-4 py-2 rounded-full font-bold">
+                            Limited Time Offer
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold mb-4">Summer Paradise Package</h3>
+                        <p class="text-gray-600 mb-6">Book 5 nights and get 2 nights free! Includes complimentary spa treatment and sunset cruise.</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-400 line-through text-xl">$2,100</span>
+                                <span class="text-4xl font-bold text-amber-600 ml-3">$1,499</span>
+                            </div>
+                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Offer 2 -->
+                <div class="reveal bg-white text-gray-800 rounded-2xl shadow-2xl overflow-hidden">
+                    <div class="relative">
+                        <img src="https://images.unsplash.com/photo-1519167758481-83f29da8c2b0?w=600" alt="Honeymoon Offer" class="w-full h-64 object-cover">
+                        <div class="absolute top-4 left-4 bg-pink-500 text-white px-4 py-2 rounded-full font-bold">
+                            Honeymoon Special
+                        </div>
+                    </div>
+                    <div class="p-8">
+                        <h3 class="text-3xl font-bold mb-4">Romantic Escape</h3>
+                        <p class="text-gray-600 mb-6">Perfect for newlyweds! Includes champagne, couples massage, and private beach dinner.</p>
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <span class="text-gray-400 line-through text-xl">$1,800</span>
+                                <span class="text-4xl font-bold text-amber-600 ml-3">$1,299</span>
+                            </div>
+                            <button class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-full font-semibold transition">
+                                Book Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Gallery</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Explore the beauty of Azure Paradise through our curated collection of moments.</p>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1571896349842-33c89424de2d?w=400" alt="Gallery 1" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=400" alt="Gallery 2" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400" alt="Gallery 3" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1540541338287-41700207dee6?w=400" alt="Gallery 4" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?w=400" alt="Gallery 5" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1578683010236-d716f9a3f461?w=400" alt="Gallery 6" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400" alt="Gallery 7" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+                <div class="reveal gallery-item relative overflow-hidden rounded-lg cursor-pointer group h-64">
+                    <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400" alt="Gallery 8" class="w-full h-full object-cover transform group-hover:scale-110 transition duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition flex items-center justify-center">
+                        <i class="fas fa-search-plus text-white text-3xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span id="lightbox-close" class="absolute top-8 right-8 text-white text-4xl cursor-pointer hover:text-amber-400 transition">&times;</span>
+        <img id="lightbox-img" src="" alt="Lightbox Image" class="max-w-full max-h-full">
+    </div>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-20 bg-gradient-to-b from-blue-50 to-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Guest Testimonials</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Hear what our guests have to say about their unforgettable experiences.</p>
+            </div>
+            
+            <div class="relative max-w-4xl mx-auto">
+                <!-- Testimonial Slider -->
+                <div id="testimonial-slider" class="overflow-hidden">
+                    <div id="testimonial-track" class="flex transition-transform duration-500">
+                        <!-- Testimonial 1 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                                <div class="flex items-center mb-6">
+                                    <div class="text-amber-500 text-2xl">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-6 italic leading-relaxed">
+                                    "Azure Paradise exceeded all our expectations! The staff was incredibly attentive, the rooms were pristine, and the views were absolutely breathtaking. We can't wait to return for our anniversary next year."
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="https://i.pravatar.cc/100?img=1" alt="Guest" class="w-16 h-16 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Sarah & Michael Johnson</h4>
+                                        <p class="text-gray-600">United States</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 2 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                                <div class="flex items-center mb-6">
+                                    <div class="text-amber-500 text-2xl">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-6 italic leading-relaxed">
+                                    "The perfect honeymoon destination! From the romantic beach dinners to the luxurious spa treatments, every moment was magical. The resort truly knows how to create unforgettable memories."
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="https://i.pravatar.cc/100?img=5" alt="Guest" class="w-16 h-16 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">Emma & James Wilson</h4>
+                                        <p class="text-gray-600">United Kingdom</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="min-w-full px-4">
+                            <div class="bg-white rounded-2xl shadow-xl p-8 md:p-12">
+                                <div class="flex items-center mb-6">
+                                    <div class="text-amber-500 text-2xl">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                </div>
+                                <p class="text-gray-600 text-lg mb-6 italic leading-relaxed">
+                                    "An absolute paradise! The beach villa was stunning, the food was exceptional, and the activities kept us entertained throughout our stay. Highly recommend to anyone seeking luxury and relaxation."
+                                </p>
+                                <div class="flex items-center">
+                                    <img src="https://i.pravatar.cc/100?img=8" alt="Guest" class="w-16 h-16 rounded-full mr-4">
+                                    <div>
+                                        <h4 class="font-bold text-gray-800">David & Lisa Chen</h4>
+                                        <p class="text-gray-600">Australia</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slider Controls -->
+                <button id="prev-testimonial" class="absolute left-0 top-1/2 transform -translate-y-1/2 bg-white hover:bg-amber-500 text-gray-800 hover:text-white w-12 h-12 rounded-full shadow-lg transition flex items-center justify-center">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button id="next-testimonial" class="absolute right-0 top-1/2 transform -translate-y-1/2 bg-white hover:bg-amber-500 text-gray-800 hover:text-white w-12 h-12 rounded-full shadow-lg transition flex items-center justify-center">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+                
+                <!-- Slider Dots -->
+                <div class="flex justify-center mt-8 gap-2">
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-amber-500"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300"></button>
+                    <button class="testimonial-dot w-3 h-3 rounded-full bg-gray-300"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold mb-4 text-gray-800">Contact Us</h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">Get in touch with us to plan your perfect getaway.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                <!-- Contact Information -->
+                <div class="reveal">
+                    <div class="mb-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Resort Information</h3>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">Address</h4>
+                                    <p class="text-gray-600">123 Paradise Beach Road<br>Tropical Island, TI 12345</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-phone"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">Phone</h4>
+                                    <p class="text-gray-600">+1 (555) 123-4567</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fab fa-whatsapp"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">WhatsApp</h4>
+                                    <p class="text-gray-600">+1 (555) 987-6543</p>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="bg-blue-100 text-blue-600 w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-semibold text-gray-800 mb-1">Email</h4>
+                                    <p class="text-gray-600">info@azureparadise.com</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Map -->
+                    <div class="rounded-2xl overflow-hidden shadow-lg h-64">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3151.8354345093703!2d144.9537353153167!3d-37.81720997975171!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6ad65d4c2b349649%3A0xb6899234e561db11!2sEnvato!5e0!3m2!1sen!2sau!4v1635820000000!5m2!1sen!2sau" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                    </div>
+                </div>
+                
+                <!-- Contact Form -->
+                <div class="reveal">
+                    <form id="contact-form" class="bg-blue-50 rounded-2xl p-8">
+                        <h3 class="text-2xl font-bold mb-6 text-gray-800">Send us a Message</h3>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">Full Name</label>
+                            <input type="text" id="contact-name" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">Email Address</label>
+                            <input type="email" id="contact-email" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">Phone Number</label>
+                            <input type="tel" id="contact-phone" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+                        
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-semibold mb-2">Subject</label>
+                            <select id="contact-subject" required class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <option value="">Select a subject</option>
+                                <option value="booking">Booking Inquiry</option>
+                                <option value="general">General Question</option>
+                                <option value="feedback">Feedback</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-6">
+                            <label class="block text-gray-700 font-semibold mb-2">Message</label>
+                            <textarea id="contact-message" required rows="5" class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-lg font-semibold transition transform hover:scale-105">
+                            Send Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="container mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+                <!-- About -->
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-umbrella-beach text-amber-400"></i> Azure Paradise
+                    </h3>
+                    <p class="text-gray-400 mb-4">Experience luxury and tranquility at our exclusive beach resort. Your paradise awaits.</p>
+                    <div class="flex gap-4">
+                        <a href="#" class="bg-blue-600 hover:bg-blue-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="bg-blue-400 hover:bg-blue-500 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="bg-pink-600 hover:bg-pink-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="bg-red-600 hover:bg-red-700 w-10 h-10 rounded-full flex items-center justify-center transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Quick Links -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#home" class="text-gray-400 hover:text-amber-400 transition">Home</a></li>
+                        <li><a href="#about" class="text-gray-400 hover:text-amber-400 transition">About Us</a></li>
+                        <li><a href="#rooms" class="text-gray-400 hover:text-amber-400 transition">Rooms & Villas</a></li>
+                        <li><a href="#experiences" class="text-gray-400 hover:text-amber-400 transition">Experiences</a></li>
+                        <li><a href="#gallery" class="text-gray-400 hover:text-amber-400 transition">Gallery</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Services -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Services</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Spa & Wellness</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Fine Dining</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Water Sports</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Event Planning</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-amber-400 transition">Concierge</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Newsletter -->
+                <div>
+                    <h4 class="text-xl font-bold mb-4">Newsletter</h4>
+                    <p class="text-gray-400 mb-4">Subscribe to receive exclusive offers and updates.</p>
+                    <form id="newsletter-form" class="flex flex-col gap-2">
+                        <input type="email" id="newsletter-email" required placeholder="Your email" class="px-4 py-3 rounded-lg bg-gray-800 text-white border border-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500">
+                        <button type="submit" class="bg-amber-500 hover:bg-amber-600 text-white px-6 py-3 rounded-lg font-semibold transition">
+                            Subscribe
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Copyright -->
+            <div class="border-t border-gray-800 pt-8 text-center text-gray-400">
+                <p>&copy; 2026 Azure Paradise Resort. All rights reserved. | <a href="#" class="hover:text-amber-400 transition">Privacy Policy</a> | <a href="#" class="hover:text-amber-400 transition">Terms of Service</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button id="scroll-top" class="fixed bottom-8 right-8 bg-amber-500 hover:bg-amber-600 text-white w-12 h-12 rounded-full shadow-lg flex items-center justify-center transition transform hover:scale-110 opacity-0 pointer-events-none z-50">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+    
+    <!-- Sticky Booking Button (Mobile) -->
+    <div id="sticky-booking" class="fixed bottom-0 left-0 right-0 bg-white shadow-lg p-4 lg:hidden z-40 transform translate-y-full transition-transform">
+        <a href="#booking" class="block bg-amber-500 hover:bg-amber-600 text-white text-center px-6 py-3 rounded-full font-semibold transition">
+            Book Your Stay
+        </a>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('bg-white', 'shadow-lg');
+                navbar.querySelectorAll('a').forEach(link => {
+                    link.classList.remove('text-white');
+                    link.classList.add('text-gray-800');
+                });
+                navbar.querySelector('h1').classList.remove('text-white');
+                navbar.querySelector('h1').classList.add('text-gray-800');
+                mobileMenuBtn.classList.remove('text-white');
+                mobileMenuBtn.classList.add('text-gray-800');
+            } else {
+                navbar.classList.remove('bg-white', 'shadow-lg');
+                navbar.querySelectorAll('a').forEach(link => {
+                    link.classList.remove('text-gray-800');
+                    link.classList.add('text-white');
+                });
+                navbar.querySelector('h1').classList.remove('text-gray-800');
+                navbar.querySelector('h1').classList.add('text-white');
+                mobileMenuBtn.classList.remove('text-gray-800');
+                mobileMenuBtn.classList.add('text-white');
+            }
+        });
+        
+        // Mobile menu toggle
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // Close mobile menu when clicking a link
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+        
+        // Booking form validation
+        const bookingForm = document.getElementById('booking-form');
+        bookingForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const roomtype = document.getElementById('roomtype').value;
+            
+            if (!checkin || !checkout || !guests || !roomtype) {
+                alert('Please fill in all fields');
+                return;
+            }
+            
+            const checkinDate = new Date(checkin);
+            const checkoutDate = new Date(checkout);
+            
+            if (checkoutDate <= checkinDate) {
+                alert('Check-out date must be after check-in date');
+                return;
+            }
+            
+            alert(`Booking request submitted!\nCheck-in: ${checkin}\nCheck-out: ${checkout}\nGuests: ${guests}\nRoom Type: ${roomtype}`);
+        });
+        
+        // Gallery lightbox
+        const galleryItems = document.querySelectorAll('.gallery-item img');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxClose = document.getElementById('lightbox-close');
+        
+        galleryItems.forEach(item => {
+            item.addEventListener('click', () => {
+                lightboxImg.src = item.src;
+                lightbox.classList.add('active');
+            });
+        });
+        
+        lightboxClose.addEventListener('click', () => {
+            lightbox.classList.remove('active');
+        });
+        
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.classList.remove('active');
+            }
+        });
+        
+        // Testimonial slider
+        let currentTestimonial = 0;
+        const testimonialTrack = document.getElementById('testimonial-track');
+        const testimonialDots = document.querySelectorAll('.testimonial-dot');
+        const totalTestimonials = 3;
+        
+        function updateTestimonialSlider() {
+            testimonialTrack.style.transform = `translateX(-${currentTestimonial * 100}%)`;
+            testimonialDots.forEach((dot, index) => {
+                if (index === currentTestimonial) {
+                    dot.classList.remove('bg-gray-300');
+                    dot.classList.add('bg-amber-500');
+                } else {
+                    dot.classList.remove('bg-amber-500');
+                    dot.classList.add('bg-gray-300');
+                }
+            });
+        }
+        
+        document.getElementById('next-testimonial').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            updateTestimonialSlider();
+        });
+        
+        document.getElementById('prev-testimonial').addEventListener('click', () => {
+            currentTestimonial = (currentTestimonial - 1 + totalTestimonials) % totalTestimonials;
+            updateTestimonialSlider();
+        });
+        
+        testimonialDots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentTestimonial = index;
+                updateTestimonialSlider();
+            });
+        });
+        
+        // Auto-advance testimonials
+        setInterval(() => {
+            currentTestimonial = (currentTestimonial + 1) % totalTestimonials;
+            updateTestimonialSlider();
+        }, 5000);
+        
+        // Contact form
+        const contactForm = document.getElementById('contact-form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('contact-name').value;
+            const email = document.getElementById('contact-email').value;
+            const phone = document.getElementById('contact-phone').value;
+            const subject = document.getElementById('contact-subject').value;
+            const message = document.getElementById('contact-message').value;
+            
+            if (!name || !email || !subject || !message) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            alert(`Thank you for contacting us, ${name}! We'll get back to you soon.`);
+            contactForm.reset();
+        });
+        
+        // Newsletter form
+        const newsletterForm = document.getElementById('newsletter-form');
+        newsletterForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('newsletter-email').value;
+            
+            if (!email) {
+                alert('Please enter your email address');
+                return;
+            }
+            
+            alert(`Thank you for subscribing! We'll send updates to ${email}`);
+            newsletterForm.reset();
+        });
+        
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scroll-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.remove('opacity-0', 'pointer-events-none');
+                scrollTopBtn.classList.add('opacity-100');
+            } else {
+                scrollTopBtn.classList.remove('opacity-100');
+                scrollTopBtn.classList.add('opacity-0', 'pointer-events-none');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Sticky booking button (mobile)
+        const stickyBooking = document.getElementById('sticky-booking');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 800 && window.innerWidth < 1024) {
+                stickyBooking.classList.remove('translate-y-full');
+            } else {
+                stickyBooking.classList.add('translate-y-full');
+            }
+        });
+        
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        function checkReveal() {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', checkReveal);
+        checkReveal(); // Check on page load
+        
+        // Smooth scroll for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Set minimum date for booking form
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('checkin').setAttribute('min', today);
+        document.getElementById('checkout').setAttribute('min', today);
+        
+        // Update checkout min date when checkin changes
+        document.getElementById('checkin').addEventListener('change', function() {
+            const checkinDate = new Date(this.value);
+            checkinDate.setDate(checkinDate.getDate() + 1);
+            const minCheckout = checkinDate.toISOString().split('T')[0];
+            document.getElementById('checkout').setAttribute('min', minCheckout);
+        });
+    </script>
+</body>
+</html>

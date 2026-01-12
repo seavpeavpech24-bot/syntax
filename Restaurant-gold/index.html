@@ -1,0 +1,1431 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>La Maison - Fine Dining Restaurant</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Font Awesome for Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      /* Custom Tailwind Configuration */
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        font-family: "Playfair Display", serif;
+      }
+
+      /* Smooth Scrolling */
+      html {
+        scroll-behavior: smooth;
+      }
+
+      /* Custom Animations */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .fade-in-up {
+        animation: fadeInUp 1s ease-out;
+      }
+
+      .fade-in {
+        animation: fadeIn 1.5s ease-out;
+      }
+
+      /* Hero Section Overlay */
+      .hero-overlay {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 20, 10, 0.8),
+          rgba(60, 40, 20, 0.7)
+        );
+      }
+
+      /* Live Demo Ribbon */
+      .live-demo-ribbon {
+        position: fixed;
+        top: 40px;
+        right: -100px;
+        width: 300px;
+        background: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+        color: white;
+        text-align: center;
+        padding: 12px 0;
+        font-weight: bold;
+        font-size: 16px;
+        letter-spacing: 2px;
+        transform: rotate(45deg);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        z-index: 9999;
+        text-transform: uppercase;
+      }
+
+      /* Scroll to Top Button */
+      #scrollTopBtn {
+        transition: opacity 0.3s, transform 0.3s;
+      }
+
+      #scrollTopBtn.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Mobile Menu Animation */
+      #mobileMenu {
+        transition: max-height 0.3s ease-in-out;
+        max-height: 0;
+        overflow: hidden;
+      }
+
+      #mobileMenu.active {
+        max-height: 500px;
+      }
+
+      /* Lightbox Styles */
+      .lightbox {
+        display: none;
+        position: fixed;
+        z-index: 9999;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.95);
+      }
+
+      .lightbox.active {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .lightbox img {
+        max-width: 90%;
+        max-height: 90%;
+        object-fit: contain;
+      }
+    </style>
+  </head>
+  <body class="bg-stone-50">
+    <!-- Live Demo Ribbon -->
+    <div class="live-demo-ribbon">Live Demo</div>
+
+    <!-- Navigation Bar -->
+    <nav
+      id="navbar"
+      class="fixed w-full top-0 z-50 bg-stone-900 shadow-lg transition-all duration-300"
+    >
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <!-- Logo -->
+          <div class="text-2xl md:text-3xl font-bold text-amber-500">
+            <a href="#home" class="hover:text-amber-400 transition"
+              >La Maison</a
+            >
+          </div>
+
+          <!-- Desktop Menu -->
+          <ul class="hidden md:flex space-x-8 text-stone-100">
+            <li>
+              <a
+                href="#home"
+                class="hover:text-amber-500 transition font-medium"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a
+                href="#about"
+                class="hover:text-amber-500 transition font-medium"
+                >About</a
+              >
+            </li>
+            <li>
+              <a
+                href="#menu"
+                class="hover:text-amber-500 transition font-medium"
+                >Menu</a
+              >
+            </li>
+            <li>
+              <a
+                href="#gallery"
+                class="hover:text-amber-500 transition font-medium"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a
+                href="#reservation"
+                class="hover:text-amber-500 transition font-medium"
+                >Reservation</a
+              >
+            </li>
+            <li>
+              <a
+                href="#contact"
+                class="hover:text-amber-500 transition font-medium"
+                >Contact</a
+              >
+            </li>
+          </ul>
+
+          <!-- Mobile Hamburger -->
+          <button
+            id="hamburger"
+            class="md:hidden text-stone-100 text-2xl focus:outline-none"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="md:hidden">
+          <ul class="flex flex-col space-y-4 mt-4 text-stone-100">
+            <li>
+              <a href="#home" class="block hover:text-amber-500 transition"
+                >Home</a
+              >
+            </li>
+            <li>
+              <a href="#about" class="block hover:text-amber-500 transition"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="#menu" class="block hover:text-amber-500 transition"
+                >Menu</a
+              >
+            </li>
+            <li>
+              <a href="#gallery" class="block hover:text-amber-500 transition"
+                >Gallery</a
+              >
+            </li>
+            <li>
+              <a
+                href="#reservation"
+                class="block hover:text-amber-500 transition"
+                >Reservation</a
+              >
+            </li>
+            <li>
+              <a href="#contact" class="block hover:text-amber-500 transition"
+                >Contact</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="relative h-screen flex items-center justify-center text-center text-white"
+    >
+      <div class="absolute inset-0 z-0">
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1920"
+          alt="Restaurant Interior"
+          class="w-full h-full object-cover"
+        />
+        <div class="hero-overlay absolute inset-0"></div>
+      </div>
+
+      <!-- Live Demo Label -->
+      <div class="absolute top-24 right-4 md:top-28 md:right-8 z-20">
+        <span
+          class="bg-gradient-to-r from-amber-500 to-amber-600 text-white font-bold px-6 py-3 rounded-full shadow-2xl text-sm md:text-base animate-pulse"
+        >
+          🎬 Live Demo
+        </span>
+      </div>
+
+      <div class="relative z-10 px-4 fade-in-up">
+        <h1 class="text-5xl md:text-7xl font-bold mb-4">La Maison</h1>
+        <p class="text-xl md:text-2xl mb-8 text-amber-400 font-light">
+          Taste the Authentic Flavor
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+          <a
+            href="#menu"
+            class="bg-amber-500 hover:bg-amber-600 text-stone-900 font-semibold px-8 py-3 rounded-full transition transform hover:scale-105"
+          >
+            View Menu
+          </a>
+          <a
+            href="#reservation"
+            class="bg-transparent border-2 border-amber-500 hover:bg-amber-500 hover:text-stone-900 text-amber-500 font-semibold px-8 py-3 rounded-full transition transform hover:scale-105"
+          >
+            Book a Table
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+          <!-- Image -->
+          <div class="order-2 md:order-1">
+            <img
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
+              alt="Restaurant Food"
+              class="rounded-lg shadow-2xl w-full h-96 object-cover"
+            />
+          </div>
+
+          <!-- Content -->
+          <div class="order-1 md:order-2">
+            <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-6">
+              Our Story
+            </h2>
+            <p class="text-stone-600 mb-4 leading-relaxed">
+              Since 1985, La Maison has been serving exquisite French cuisine
+              with a modern twist. Our passion for culinary excellence and
+              dedication to using only the finest ingredients has made us a
+              beloved destination for food enthusiasts.
+            </p>
+            <p class="text-stone-600 mb-6 leading-relaxed">
+              Led by our award-winning Chef Pierre Dubois, our team crafts each
+              dish with meticulous attention to detail, ensuring an
+              unforgettable dining experience that celebrates the rich
+              traditions of French gastronomy.
+            </p>
+            <div class="flex gap-8 mb-6">
+              <div>
+                <h3 class="text-3xl font-bold text-amber-500">38+</h3>
+                <p class="text-stone-600">Years Experience</p>
+              </div>
+              <div>
+                <h3 class="text-3xl font-bold text-amber-500">50+</h3>
+                <p class="text-stone-600">Master Chefs</p>
+              </div>
+            </div>
+            <a
+              href="#menu"
+              class="inline-block bg-stone-900 hover:bg-stone-800 text-white font-semibold px-8 py-3 rounded-full transition"
+            >
+              Explore Menu
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-20 bg-stone-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+            Our Menu
+          </h2>
+          <p class="text-stone-600 max-w-2xl mx-auto">
+            Discover our carefully curated selection of dishes, prepared with
+            passion and the finest ingredients
+          </p>
+        </div>
+
+        <!-- Menu Filter Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button
+            class="menu-filter-btn bg-amber-500 text-white px-6 py-2 rounded-full font-medium transition hover:bg-amber-600"
+            data-category="all"
+          >
+            All
+          </button>
+          <button
+            class="menu-filter-btn bg-stone-300 text-stone-900 px-6 py-2 rounded-full font-medium transition hover:bg-stone-400"
+            data-category="starters"
+          >
+            Starters
+          </button>
+          <button
+            class="menu-filter-btn bg-stone-300 text-stone-900 px-6 py-2 rounded-full font-medium transition hover:bg-stone-400"
+            data-category="mains"
+          >
+            Main Courses
+          </button>
+          <button
+            class="menu-filter-btn bg-stone-300 text-stone-900 px-6 py-2 rounded-full font-medium transition hover:bg-stone-400"
+            data-category="drinks"
+          >
+            Drinks
+          </button>
+          <button
+            class="menu-filter-btn bg-stone-300 text-stone-900 px-6 py-2 rounded-full font-medium transition hover:bg-stone-400"
+            data-category="desserts"
+          >
+            Desserts
+          </button>
+        </div>
+
+        <!-- Menu Items Grid -->
+        <div id="menuGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Starters -->
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="starters"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1541529086526-db283c563270?w=600"
+              alt="French Onion Soup"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                French Onion Soup
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Classic caramelized onions with Gruyère cheese and crispy
+                croutons
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$12</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="starters"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1625944525533-473f1a3d54e7?w=600"
+              alt="Escargots"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Escargots de Bourgogne
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Burgundy snails with garlic herb butter and fresh parsley
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$18</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="starters"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=600"
+              alt="Foie Gras"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Foie Gras Terrine
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Silky duck liver pâté with fig compote and toasted brioche
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$24</p>
+            </div>
+          </div>
+
+          <!-- Main Courses -->
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="mains"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1600891964092-4316c288032e?w=600"
+              alt="Beef Bourguignon"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Beef Bourguignon
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Slow-braised beef in red wine with pearl onions and mushrooms
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$38</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="mains"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1580959375944-57c8e2aa9b3d?w=600"
+              alt="Coq au Vin"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">Coq au Vin</h3>
+              <p class="text-stone-600 mb-4">
+                Tender chicken braised in burgundy wine with bacon and herbs
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$32</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="mains"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=600"
+              alt="Duck Confit"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Duck Confit
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Crispy duck leg with roasted potatoes and seasonal vegetables
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$36</p>
+            </div>
+          </div>
+
+          <!-- Drinks -->
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="drinks"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1510812431401-41d2bd2722f3?w=600"
+              alt="Wine"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Château Margaux 2015
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Premium Bordeaux red wine with rich tannins and dark fruit notes
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$180</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="drinks"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=600"
+              alt="Champagne"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Dom Pérignon Vintage
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Elegant champagne with fine bubbles and complex flavors
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$250</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="drinks"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1544145945-35c4e5d6d0ec?w=600"
+              alt="Cocktail"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                French 75 Cocktail
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Gin, champagne, lemon juice, and sugar - a classic French
+                cocktail
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$16</p>
+            </div>
+          </div>
+
+          <!-- Desserts -->
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="desserts"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=600"
+              alt="Crème Brûlée"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Crème Brûlée
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Vanilla custard with caramelized sugar crust and fresh berries
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$14</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="desserts"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1464349095431-e9a21285b5f3?w=600"
+              alt="Tarte Tatin"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Tarte Tatin
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Upside-down caramelized apple tart with vanilla ice cream
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$12</p>
+            </div>
+          </div>
+
+          <div
+            class="menu-item bg-white rounded-lg shadow-lg overflow-hidden transform transition hover:scale-105 hover:shadow-2xl"
+            data-category="desserts"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=600"
+              alt="Chocolate Soufflé"
+              class="w-full h-48 object-cover"
+            />
+            <div class="p-6">
+              <h3 class="text-2xl font-bold text-stone-900 mb-2">
+                Chocolate Soufflé
+              </h3>
+              <p class="text-stone-600 mb-4">
+                Light and airy dark chocolate soufflé with crème anglaise
+              </p>
+              <p class="text-amber-500 font-bold text-xl">$16</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Special Offers Section -->
+    <section
+      class="py-20 bg-gradient-to-r from-amber-600 to-amber-500 text-white"
+    >
+      <div class="container mx-auto px-4 text-center">
+        <div class="max-w-3xl mx-auto">
+          <span
+            class="inline-block bg-white text-amber-600 font-bold px-6 py-2 rounded-full mb-6 text-lg"
+          >
+            LIMITED TIME OFFER
+          </span>
+          <h2 class="text-4xl md:text-5xl font-bold mb-6">Weekend Special</h2>
+          <p class="text-xl mb-8">
+            Enjoy 15% OFF on all main courses every Saturday and Sunday. Book
+            your table now and experience culinary excellence at an exceptional
+            value.
+          </p>
+          <a
+            href="#reservation"
+            class="inline-block bg-white text-amber-600 hover:bg-stone-100 font-semibold px-8 py-3 rounded-full transition transform hover:scale-105"
+          >
+            Reserve Your Table
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+            Gallery
+          </h2>
+          <p class="text-stone-600 max-w-2xl mx-auto">
+            A glimpse into our culinary artistry and elegant ambiance
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600"
+              alt="Gallery 1"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?w=600"
+              alt="Gallery 2"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600"
+              alt="Gallery 3"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?w=600"
+              alt="Gallery 4"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600"
+              alt="Gallery 5"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1476224203421-9ac39bcb3327?w=600"
+              alt="Gallery 6"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1563379926898-05f4575a45d8?w=600"
+              alt="Gallery 7"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+          <div
+            class="gallery-item overflow-hidden rounded-lg shadow-lg cursor-pointer transform transition hover:scale-105"
+          >
+            <img
+              src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=600"
+              alt="Gallery 8"
+              class="w-full h-64 object-cover"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+      <span
+        id="closeLightbox"
+        class="absolute top-8 right-8 text-white text-4xl cursor-pointer hover:text-amber-500 transition"
+        >&times;</span
+      >
+      <img id="lightboxImg" src="" alt="Lightbox Image" />
+    </div>
+
+    <!-- Reservation Section -->
+    <section id="reservation" class="py-20 bg-stone-900 text-white">
+      <div class="container mx-auto px-4">
+        <div class="max-w-2xl mx-auto">
+          <div class="text-center mb-12">
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Reserve a Table</h2>
+            <p class="text-stone-300">
+              Book your dining experience with us and let us create
+              unforgettable memories
+            </p>
+          </div>
+
+          <form
+            id="reservationForm"
+            class="bg-stone-800 p-8 rounded-lg shadow-2xl"
+          >
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-stone-300 mb-2 font-medium"
+                  >Full Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  required
+                  class="w-full px-4 py-3 bg-stone-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+              <div>
+                <label class="block text-stone-300 mb-2 font-medium"
+                  >Phone Number</label
+                >
+                <input
+                  type="tel"
+                  id="phone"
+                  required
+                  class="w-full px-4 py-3 bg-stone-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+              <div>
+                <label class="block text-stone-300 mb-2 font-medium"
+                  >Date</label
+                >
+                <input
+                  type="date"
+                  id="date"
+                  required
+                  class="w-full px-4 py-3 bg-stone-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+              <div>
+                <label class="block text-stone-300 mb-2 font-medium"
+                  >Time</label
+                >
+                <input
+                  type="time"
+                  id="time"
+                  required
+                  class="w-full px-4 py-3 bg-stone-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+                />
+              </div>
+            </div>
+
+            <div class="mb-6">
+              <label class="block text-stone-300 mb-2 font-medium"
+                >Number of Guests</label
+              >
+              <select
+                id="guests"
+                required
+                class="w-full px-4 py-3 bg-stone-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-amber-500 transition"
+              >
+                <option value="">Select number of guests</option>
+                <option value="1">1 Guest</option>
+                <option value="2">2 Guests</option>
+                <option value="3">3 Guests</option>
+                <option value="4">4 Guests</option>
+                <option value="5">5 Guests</option>
+                <option value="6">6 Guests</option>
+                <option value="7+">7+ Guests</option>
+              </select>
+            </div>
+
+            <button
+              type="submit"
+              class="w-full bg-amber-500 hover:bg-amber-600 text-stone-900 font-bold py-4 rounded-lg transition transform hover:scale-105"
+            >
+              Confirm Reservation
+            </button>
+
+            <p
+              id="formMessage"
+              class="mt-4 text-center text-amber-400 hidden"
+            ></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="py-20 bg-stone-100">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+            What Our Guests Say
+          </h2>
+          <p class="text-stone-600 max-w-2xl mx-auto">
+            Read reviews from our satisfied customers who have experienced our
+            exceptional service
+          </p>
+        </div>
+
+        <div class="max-w-4xl mx-auto">
+          <div id="testimonialSlider" class="relative">
+            <!-- Testimonial 1 -->
+            <div class="testimonial-slide bg-white p-8 rounded-lg shadow-xl">
+              <div class="flex items-center mb-4">
+                <div class="text-amber-500 text-2xl">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <p class="text-stone-600 text-lg mb-6 italic">
+                "An absolutely divine dining experience! The Beef Bourguignon
+                was cooked to perfection, and the service was impeccable. La
+                Maison has become our favorite restaurant for special
+                occasions."
+              </p>
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4"
+                >
+                  S
+                </div>
+                <div>
+                  <h4 class="font-bold text-stone-900">Sarah Mitchell</h4>
+                  <p class="text-stone-500 text-sm">Food Critic</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div
+              class="testimonial-slide bg-white p-8 rounded-lg shadow-xl hidden"
+            >
+              <div class="flex items-center mb-4">
+                <div class="text-amber-500 text-2xl">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <p class="text-stone-600 text-lg mb-6 italic">
+                "Chef Pierre's culinary expertise shines through every dish. The
+                Duck Confit was extraordinary, and the wine pairing
+                recommendations were spot on. Highly recommended!"
+              </p>
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4"
+                >
+                  M
+                </div>
+                <div>
+                  <h4 class="font-bold text-stone-900">Michael Chen</h4>
+                  <p class="text-stone-500 text-sm">Business Executive</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Testimonial 3 -->
+            <div
+              class="testimonial-slide bg-white p-8 rounded-lg shadow-xl hidden"
+            >
+              <div class="flex items-center mb-4">
+                <div class="text-amber-500 text-2xl">
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                  <i class="fas fa-star"></i>
+                </div>
+              </div>
+              <p class="text-stone-600 text-lg mb-6 italic">
+                "From the moment we walked in, we were treated like royalty. The
+                ambiance is elegant, the food is exceptional, and the desserts
+                are to die for. A true gem!"
+              </p>
+              <div class="flex items-center">
+                <div
+                  class="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center text-white font-bold text-xl mr-4"
+                >
+                  E
+                </div>
+                <div>
+                  <h4 class="font-bold text-stone-900">Emily Rodriguez</h4>
+                  <p class="text-stone-500 text-sm">Travel Blogger</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Slider Controls -->
+          <div class="flex justify-center gap-4 mt-8">
+            <button
+              id="prevTestimonial"
+              class="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2 rounded-full transition"
+            >
+              <i class="fas fa-chevron-left"></i>
+            </button>
+            <button
+              id="nextTestimonial"
+              class="bg-stone-900 hover:bg-stone-800 text-white px-6 py-2 rounded-full transition"
+            >
+              <i class="fas fa-chevron-right"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-bold text-stone-900 mb-4">
+            Contact Us
+          </h2>
+          <p class="text-stone-600 max-w-2xl mx-auto">
+            We'd love to hear from you. Visit us or get in touch
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-12">
+          <!-- Contact Information -->
+          <div>
+            <div class="mb-8">
+              <div class="flex items-start mb-6">
+                <div
+                  class="bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-stone-900 text-xl mb-2">Address</h3>
+                  <p class="text-stone-600">
+                    123 Gourmet Street, Culinary District<br />Paris, France
+                    75001
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start mb-6">
+                <div
+                  class="bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-phone"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-stone-900 text-xl mb-2">Phone</h3>
+                  <p class="text-stone-600">
+                    +33 1 23 45 67 89<br />+33 1 98 76 54 32
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start mb-6">
+                <div
+                  class="bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-envelope"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-stone-900 text-xl mb-2">Email</h3>
+                  <p class="text-stone-600">
+                    info@lamaison.com<br />reservations@lamaison.com
+                  </p>
+                </div>
+              </div>
+
+              <div class="flex items-start">
+                <div
+                  class="bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center mr-4 flex-shrink-0"
+                >
+                  <i class="fas fa-clock"></i>
+                </div>
+                <div>
+                  <h3 class="font-bold text-stone-900 text-xl mb-2">
+                    Opening Hours
+                  </h3>
+                  <p class="text-stone-600">
+                    Monday - Friday: 12:00 PM - 10:00 PM<br />
+                    Saturday - Sunday: 11:00 AM - 11:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="flex gap-4">
+              <a
+                href="#"
+                class="bg-stone-900 hover:bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center transition"
+              >
+                <i class="fab fa-facebook-f"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-stone-900 hover:bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center transition"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-stone-900 hover:bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center transition"
+              >
+                <i class="fab fa-twitter"></i>
+              </a>
+              <a
+                href="#"
+                class="bg-stone-900 hover:bg-amber-500 text-white w-12 h-12 rounded-full flex items-center justify-center transition"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+
+          <!-- Google Map -->
+          <div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2624.9916256937595!2d2.292292615674398!3d48.85837007928746!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47e66fec70fb1d8f%3A0x40b82c3688c9460!2sEiffel%20Tower!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus"
+              width="100%"
+              height="450"
+              style="border: 0; border-radius: 0.5rem"
+              allowfullscreen=""
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              class="shadow-lg"
+            >
+            </iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-stone-900 text-white py-12">
+      <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-3 gap-8 mb-8">
+          <!-- Logo & Description -->
+          <div>
+            <h3 class="text-3xl font-bold text-amber-500 mb-4">La Maison</h3>
+            <p class="text-stone-300 mb-4">
+              Experience the finest French cuisine in an elegant atmosphere.
+              Where tradition meets innovation.
+            </p>
+          </div>
+
+          <!-- Opening Hours -->
+          <div>
+            <h4 class="text-xl font-bold mb-4">Opening Hours</h4>
+            <ul class="text-stone-300 space-y-2">
+              <li class="flex justify-between">
+                <span>Monday - Friday</span>
+                <span>12:00 PM - 10:00 PM</span>
+              </li>
+              <li class="flex justify-between">
+                <span>Saturday - Sunday</span>
+                <span>11:00 AM - 11:00 PM</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- Quick Links -->
+          <div>
+            <h4 class="text-xl font-bold mb-4">Quick Links</h4>
+            <ul class="text-stone-300 space-y-2">
+              <li>
+                <a href="#about" class="hover:text-amber-500 transition"
+                  >About Us</a
+                >
+              </li>
+              <li>
+                <a href="#menu" class="hover:text-amber-500 transition"
+                  >Our Menu</a
+                >
+              </li>
+              <li>
+                <a href="#reservation" class="hover:text-amber-500 transition"
+                  >Reservations</a
+                >
+              </li>
+              <li>
+                <a href="#contact" class="hover:text-amber-500 transition"
+                  >Contact</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="border-t border-stone-700 pt-8 text-center text-stone-400">
+          <p>
+            &copy; 2026 La Maison Restaurant. All rights reserved. Crafted with
+            passion and excellence.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button
+      id="scrollTopBtn"
+      class="fixed bottom-8 right-8 bg-amber-500 hover:bg-amber-600 text-white w-12 h-12 rounded-full shadow-lg opacity-0 transform translate-y-10 transition z-50"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+      // Mobile Menu Toggle
+      const hamburger = document.getElementById("hamburger");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      hamburger.addEventListener("click", () => {
+        mobileMenu.classList.toggle("active");
+        const icon = hamburger.querySelector("i");
+        icon.classList.toggle("fa-bars");
+        icon.classList.toggle("fa-times");
+      });
+
+      // Close mobile menu when clicking on a link
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.remove("active");
+          const icon = hamburger.querySelector("i");
+          icon.classList.add("fa-bars");
+          icon.classList.remove("fa-times");
+        });
+      });
+
+      // Sticky Navbar
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 100) {
+          navbar.classList.add("shadow-2xl");
+        } else {
+          navbar.classList.remove("shadow-2xl");
+        }
+      });
+
+      // Menu Filter
+      const filterButtons = document.querySelectorAll(".menu-filter-btn");
+      const menuItems = document.querySelectorAll(".menu-item");
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          // Update active button
+          filterButtons.forEach((btn) => {
+            btn.classList.remove("bg-amber-500", "text-white");
+            btn.classList.add("bg-stone-300", "text-stone-900");
+          });
+          button.classList.remove("bg-stone-300", "text-stone-900");
+          button.classList.add("bg-amber-500", "text-white");
+
+          // Filter menu items
+          const category = button.getAttribute("data-category");
+          menuItems.forEach((item) => {
+            if (
+              category === "all" ||
+              item.getAttribute("data-category") === category
+            ) {
+              item.style.display = "block";
+            } else {
+              item.style.display = "none";
+            }
+          });
+        });
+      });
+
+      // Gallery Lightbox
+      const galleryItems = document.querySelectorAll(".gallery-item img");
+      const lightbox = document.getElementById("lightbox");
+      const lightboxImg = document.getElementById("lightboxImg");
+      const closeLightbox = document.getElementById("closeLightbox");
+
+      galleryItems.forEach((item) => {
+        item.addEventListener("click", () => {
+          lightbox.classList.add("active");
+          lightboxImg.src = item.src;
+        });
+      });
+
+      closeLightbox.addEventListener("click", () => {
+        lightbox.classList.remove("active");
+      });
+
+      lightbox.addEventListener("click", (e) => {
+        if (e.target === lightbox) {
+          lightbox.classList.remove("active");
+        }
+      });
+
+      // Reservation Form Validation
+      const reservationForm = document.getElementById("reservationForm");
+      const formMessage = document.getElementById("formMessage");
+
+      reservationForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const name = document.getElementById("name").value;
+        const phone = document.getElementById("phone").value;
+        const date = document.getElementById("date").value;
+        const time = document.getElementById("time").value;
+        const guests = document.getElementById("guests").value;
+
+        // Basic validation
+        if (!name || !phone || !date || !time || !guests) {
+          formMessage.textContent = "Please fill in all fields.";
+          formMessage.classList.remove("hidden");
+          formMessage.classList.add("text-red-500");
+          return;
+        }
+
+        // Phone validation (basic)
+        const phoneRegex = /^[\d\s\+\-\(\)]+$/;
+        if (!phoneRegex.test(phone)) {
+          formMessage.textContent = "Please enter a valid phone number.";
+          formMessage.classList.remove("hidden");
+          formMessage.classList.add("text-red-500");
+          return;
+        }
+
+        // Date validation (must be future date)
+        const selectedDate = new Date(date);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+
+        if (selectedDate < today) {
+          formMessage.textContent = "Please select a future date.";
+          formMessage.classList.remove("hidden");
+          formMessage.classList.add("text-red-500");
+          return;
+        }
+
+        // Success message
+        formMessage.textContent = `Thank you, ${name}! Your reservation for ${guests} on ${date} at ${time} has been confirmed. We'll contact you at ${phone}.`;
+        formMessage.classList.remove("hidden", "text-red-500");
+        formMessage.classList.add("text-green-400");
+
+        // Reset form
+        reservationForm.reset();
+      });
+
+      // Testimonial Slider
+      const testimonialSlides = document.querySelectorAll(".testimonial-slide");
+      const prevBtn = document.getElementById("prevTestimonial");
+      const nextBtn = document.getElementById("nextTestimonial");
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        testimonialSlides.forEach((slide, i) => {
+          if (i === index) {
+            slide.classList.remove("hidden");
+          } else {
+            slide.classList.add("hidden");
+          }
+        });
+      }
+
+      prevBtn.addEventListener("click", () => {
+        currentSlide =
+          (currentSlide - 1 + testimonialSlides.length) %
+          testimonialSlides.length;
+        showSlide(currentSlide);
+      });
+
+      nextBtn.addEventListener("click", () => {
+        currentSlide = (currentSlide + 1) % testimonialSlides.length;
+        showSlide(currentSlide);
+      });
+
+      // Auto-rotate testimonials every 5 seconds
+      setInterval(() => {
+        currentSlide = (currentSlide + 1) % testimonialSlides.length;
+        showSlide(currentSlide);
+      }, 5000);
+
+      // Scroll to Top Button
+      const scrollTopBtn = document.getElementById("scrollTopBtn");
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.add("show");
+        } else {
+          scrollTopBtn.classList.remove("show");
+        }
+      });
+
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Animate sections on scroll
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -100px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.style.opacity = "1";
+            entry.target.style.transform = "translateY(0)";
+          }
+        });
+      }, observerOptions);
+
+      // Observe all sections
+      const sections = document.querySelectorAll("section");
+      sections.forEach((section) => {
+        section.style.opacity = "0";
+        section.style.transform = "translateY(30px)";
+        section.style.transition =
+          "opacity 0.6s ease-out, transform 0.6s ease-out";
+        observer.observe(section);
+      });
+
+      // Hero section should be visible immediately
+      const heroSection = document.getElementById("home");
+      heroSection.style.opacity = "1";
+      heroSection.style.transform = "translateY(0)";
+    </script>
+  </body>
+</html>

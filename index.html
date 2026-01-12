@@ -1,0 +1,1085 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Syntax Studio - Software Developer</title>
+
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="assets/img/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="assets/img/favicon-16x16.png"
+    />
+    <link rel="manifest" href="site.webmanifest" />
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      .gradient-bg {
+        background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+        position: relative;
+        overflow: hidden;
+      }
+      .hover-scale {
+        transition: transform 0.3s ease;
+      }
+      .hover-scale:hover {
+        transform: scale(1.05);
+      }
+      .fade-in {
+        animation: fadeIn 1s ease-in;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .accent-gradient {
+        background: linear-gradient(135deg, #000000 0%, #434343 100%);
+      }
+
+      /* Animated Background Particles */
+      .particle {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.1);
+        animation: float 20s infinite;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0) translateX(0);
+          opacity: 0;
+        }
+        10% {
+          opacity: 1;
+        }
+        90% {
+          opacity: 1;
+        }
+        100% {
+          transform: translateY(-100vh) translateX(100px);
+          opacity: 0;
+        }
+      }
+
+      .particle:nth-child(1) {
+        left: 10%;
+        width: 80px;
+        height: 80px;
+        animation-delay: 0s;
+        animation-duration: 25s;
+      }
+
+      .particle:nth-child(2) {
+        left: 20%;
+        width: 60px;
+        height: 60px;
+        animation-delay: 2s;
+        animation-duration: 20s;
+      }
+
+      .particle:nth-child(3) {
+        left: 35%;
+        width: 100px;
+        height: 100px;
+        animation-delay: 4s;
+        animation-duration: 30s;
+      }
+
+      .particle:nth-child(4) {
+        left: 50%;
+        width: 50px;
+        height: 50px;
+        animation-delay: 0s;
+        animation-duration: 18s;
+      }
+
+      .particle:nth-child(5) {
+        left: 65%;
+        width: 70px;
+        height: 70px;
+        animation-delay: 3s;
+        animation-duration: 22s;
+      }
+
+      .particle:nth-child(6) {
+        left: 80%;
+        width: 90px;
+        height: 90px;
+        animation-delay: 5s;
+        animation-duration: 28s;
+      }
+
+      .particle:nth-child(7) {
+        left: 15%;
+        width: 40px;
+        height: 40px;
+        animation-delay: 7s;
+        animation-duration: 24s;
+      }
+
+      .particle:nth-child(8) {
+        left: 75%;
+        width: 55px;
+        height: 55px;
+        animation-delay: 1s;
+        animation-duration: 26s;
+      }
+
+      /* Floating Code Symbols */
+      .code-symbol {
+        position: absolute;
+        font-size: 24px;
+        color: rgba(255, 255, 255, 0.15);
+        font-family: "Courier New", monospace;
+        animation: floatCode 15s infinite ease-in-out;
+      }
+
+      @keyframes floatCode {
+        0%,
+        100% {
+          transform: translateY(0) rotate(0deg);
+          opacity: 0;
+        }
+        10% {
+          opacity: 0.8;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+          transform: translateY(-80vh) rotate(360deg);
+          opacity: 0;
+        }
+      }
+
+      .code-symbol:nth-child(9) {
+        left: 25%;
+        top: 80%;
+        animation-delay: 0s;
+        animation-duration: 20s;
+      }
+
+      .code-symbol:nth-child(10) {
+        left: 60%;
+        top: 70%;
+        animation-delay: 3s;
+        animation-duration: 18s;
+      }
+
+      .code-symbol:nth-child(11) {
+        left: 40%;
+        top: 85%;
+        animation-delay: 6s;
+        animation-duration: 22s;
+      }
+
+      .code-symbol:nth-child(12) {
+        left: 70%;
+        top: 75%;
+        animation-delay: 2s;
+        animation-duration: 19s;
+      }
+
+      /* Text Animation */
+      .hero-text {
+        animation: slideUp 1s ease-out;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .hero-subtitle {
+        animation: slideUp 1s ease-out 0.2s both;
+      }
+
+      .hero-description {
+        animation: slideUp 1s ease-out 0.4s both;
+      }
+
+      .hero-buttons {
+        animation: slideUp 1s ease-out 0.6s both;
+      }
+    </style>
+  </head>
+  <body class="font-sans text-gray-800">
+    <!-- Navbar -->
+    <nav
+      id="navbar"
+      class="fixed w-full bg-white shadow-md z-50 transition-all duration-300"
+    >
+      <div
+        class="container mx-auto px-6 py-4 flex justify-between items-center"
+      >
+        <div class="text-2xl font-bold text-gray-900">Syntax Studio</div>
+        <div class="hidden md:flex space-x-8">
+          <a
+            href="#home"
+            class="nav-link text-gray-700 hover:text-gray-900 transition"
+            >Home</a
+          >
+          <a
+            href="#about"
+            class="nav-link text-gray-700 hover:text-gray-900 transition"
+            >About</a
+          >
+          <a
+            href="#services"
+            class="nav-link text-gray-700 hover:text-gray-900 transition"
+            >Services</a
+          >
+          <a
+            href="#portfolio"
+            class="nav-link text-gray-700 hover:text-gray-900 transition"
+            >Portfolio</a
+          >
+          <a
+            href="#contact"
+            class="nav-link text-gray-700 hover:text-gray-900 transition"
+            >Contact</a
+          >
+        </div>
+        <button
+          id="mobile-menu-btn"
+          class="md:hidden text-gray-700 focus:outline-none"
+        >
+          <i class="fas fa-bars text-2xl"></i>
+        </button>
+      </div>
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden md:hidden bg-white border-t">
+        <a href="#home" class="block px-6 py-3 text-gray-700 hover:bg-gray-50"
+          >Home</a
+        >
+        <a href="#about" class="block px-6 py-3 text-gray-700 hover:bg-gray-50"
+          >About</a
+        >
+        <a
+          href="#services"
+          class="block px-6 py-3 text-gray-700 hover:bg-gray-50"
+          >Services</a
+        >
+        <a
+          href="#portfolio"
+          class="block px-6 py-3 text-gray-700 hover:bg-gray-50"
+          >Portfolio</a
+        >
+        <a
+          href="#contact"
+          class="block px-6 py-3 text-gray-700 hover:bg-gray-50"
+          >Contact</a
+        >
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="home"
+      class="gradient-bg min-h-screen flex items-center justify-center text-white pt-16"
+    >
+      <!-- Animated Particles -->
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+      <div class="particle"></div>
+
+      <!-- Floating Code Symbols -->
+      <div class="code-symbol">&lt;/&gt;</div>
+      <div class="code-symbol">{ }</div>
+      <div class="code-symbol">[ ]</div>
+      <div class="code-symbol">&lt;div&gt;</div>
+
+      <div class="container mx-auto px-6 text-center relative z-10">
+        <h1 class="text-5xl md:text-7xl font-bold mb-4 hero-text">
+          Hi, I'm Seavpeav Pech
+        </h1>
+        <p class="text-xl md:text-2xl mb-2 hero-subtitle">
+          Software Developer / Web Developer
+        </p>
+        <p class="text-lg md:text-xl mb-8 text-gray-300 hero-description">
+          I create websites and web applications for businesses
+        </p>
+        <div
+          class="flex flex-col sm:flex-row gap-4 justify-center items-center hero-buttons"
+        >
+          <a
+            href="#portfolio"
+            class="w-full sm:w-auto bg-white text-gray-900 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition hover-scale text-center"
+          >
+            View My Work
+          </a>
+          <a
+            href="#contact"
+            class="w-full sm:w-auto bg-transparent border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-gray-900 transition hover-scale text-center"
+          >
+            Contact Me
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+          About Me
+        </h2>
+        <div class="flex flex-col md:flex-row items-center gap-12">
+          <div class="md:w-1/3">
+            <img
+              src="assets/img/profile.png"
+              alt="Profile"
+              class="rounded-full shadow-lg mx-auto hover-scale w-64 h-64 object-cover"
+            />
+          </div>
+          <div class="md:w-2/3">
+            <h3 class="text-2xl font-semibold mb-4 text-gray-900">
+              Hello! I'm a passionate developer
+            </h3>
+            <p class="text-gray-700 mb-4 leading-relaxed">
+              I'm a software developer with a strong background in web
+              development and design. I graduated with a degree in Computer
+              Science and have been working in the industry for several years.
+            </p>
+            <p class="text-gray-700 mb-6 leading-relaxed">
+              My expertise includes front-end and back-end development, creating
+              responsive and user-friendly web applications. I'm passionate
+              about clean code, modern design, and delivering high-quality
+              solutions.
+            </p>
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div class="bg-white p-4 rounded-lg shadow text-center">
+                <i class="fab fa-html5 text-4xl text-orange-600 mb-2"></i>
+                <p class="font-semibold">HTML/CSS</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow text-center">
+                <i class="fab fa-js text-4xl text-yellow-500 mb-2"></i>
+                <p class="font-semibold">JavaScript</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow text-center">
+                <i class="fab fa-react text-4xl text-blue-500 mb-2"></i>
+                <p class="font-semibold">React</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow text-center">
+                <i class="fab fa-node text-4xl text-green-600 mb-2"></i>
+                <p class="font-semibold">Node.js</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow text-center">
+                <i class="fab fa-python text-4xl text-blue-600 mb-2"></i>
+                <p class="font-semibold">Python</p>
+              </div>
+              <div class="bg-white p-4 rounded-lg shadow text-center">
+                <i class="fas fa-database text-4xl text-gray-700 mb-2"></i>
+                <p class="font-semibold">Databases</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+          My Services
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <!-- Service 1 -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+          >
+            <div
+              class="bg-gray-900 w-16 h-16 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="fas fa-laptop-code text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">
+              Website Development
+            </h3>
+            <p class="text-gray-600">
+              Custom websites built with modern technologies, responsive design,
+              and optimized performance.
+            </p>
+          </div>
+          <!-- Service 2 -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+          >
+            <div
+              class="bg-gray-900 w-16 h-16 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="fas fa-mobile-alt text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">
+              Web Applications
+            </h3>
+            <p class="text-gray-600">
+              Full-stack web applications with robust backends and intuitive
+              user interfaces.
+            </p>
+          </div>
+          <!-- Service 3 -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+          >
+            <div
+              class="bg-gray-900 w-16 h-16 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="fas fa-paint-brush text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">
+              Front-end Design
+            </h3>
+            <p class="text-gray-600">
+              Beautiful, modern UI/UX design that engages users and enhances
+              brand identity.
+            </p>
+          </div>
+          <!-- Service 4 -->
+          <div
+            class="bg-white p-8 rounded-xl shadow-lg hover:shadow-xl transition-shadow border border-gray-100"
+          >
+            <div
+              class="bg-gray-900 w-16 h-16 rounded-full flex items-center justify-center mb-4"
+            >
+              <i class="fas fa-tools text-white text-2xl"></i>
+            </div>
+            <h3 class="text-xl font-semibold mb-3 text-gray-800">
+              Maintenance & Hosting
+            </h3>
+            <p class="text-gray-600">
+              Ongoing support, updates, and reliable hosting solutions for your
+              web projects.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+          My Portfolio
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Project 1 - Resort -->
+          <div
+            class="relative group overflow-hidden rounded-xl shadow-lg hover-scale"
+          >
+            <div class="absolute top-4 right-4 z-10">
+              <span
+                class="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              >
+                Live Demo
+              </span>
+            </div>
+            <img
+              src="assets/img/resort.png"
+              alt="Project 1"
+              class="w-full h-64 object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+            >
+              <h3 class="text-white text-xl font-bold mb-2">Resort Website</h3>
+              <p class="text-gray-300 mb-4">Web Application</p>
+              <div class="flex space-x-3">
+                <a
+                  href="resort/index.html"
+                  target="_blank"
+                  class="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-transparent border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-gray-900 transition"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 2 - Portfolio -->
+          <div
+            class="relative group overflow-hidden rounded-xl shadow-lg hover-scale"
+          >
+            <div class="absolute top-4 right-4 z-10">
+              <span
+                class="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              >
+                Live Demo
+              </span>
+            </div>
+            <img
+              src="assets/img/portfolio.png"
+              alt="Project 2"
+              class="w-full h-64 object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+            >
+              <h3 class="text-white text-xl font-bold mb-2">
+                Portfolio Website
+              </h3>
+              <p class="text-gray-300 mb-4">Website Design</p>
+              <div class="flex space-x-3">
+                <a
+                  href="portfolio-website/index.html"
+                  target="_blank"
+                  class="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-transparent border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-gray-900 transition"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 3 - Diving Center -->
+          <div
+            class="relative group overflow-hidden rounded-xl shadow-lg hover-scale"
+          >
+            <div class="absolute top-4 right-4 z-10">
+              <span
+                class="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              >
+                Live Demo
+              </span>
+            </div>
+            <img
+              src="assets/img/diving.png"
+              alt="Project 3"
+              class="w-full h-64 object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+            >
+              <h3 class="text-white text-xl font-bold mb-2">Diving Center</h3>
+              <p class="text-gray-300 mb-4">Web Application</p>
+              <div class="flex space-x-3">
+                <a
+                  href="diving-center/index.html"
+                  target="_blank"
+                  class="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-transparent border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-gray-900 transition"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 4 - Restaurant -->
+          <div
+            class="relative group overflow-hidden rounded-xl shadow-lg hover-scale"
+          >
+            <div class="absolute top-4 right-4 z-10">
+              <span
+                class="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              >
+                Live Demo
+              </span>
+            </div>
+            <img
+              src="assets/img/restaurant.png"
+              alt="Project 4"
+              class="w-full h-64 object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+            >
+              <h3 class="text-white text-xl font-bold mb-2">
+                Restaurant Website
+              </h3>
+              <p class="text-gray-300 mb-4">Website Design</p>
+              <div class="flex space-x-3">
+                <a
+                  href="Restaurant-gold/index.html"
+                  target="_blank"
+                  class="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-transparent border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-gray-900 transition"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 5 - Tour Center -->
+          <div
+            class="relative group overflow-hidden rounded-xl shadow-lg hover-scale"
+          >
+            <div class="absolute top-4 right-4 z-10">
+              <span
+                class="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              >
+                Live Demo
+              </span>
+            </div>
+            <img
+              src="assets/img/tour-center.png"
+              alt="Project 5"
+              class="w-full h-64 object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+            >
+              <h3 class="text-white text-xl font-bold mb-2">Tour Center</h3>
+              <p class="text-gray-300 mb-4">Web Application</p>
+              <div class="flex space-x-3">
+                <a
+                  href="travelling/index.html"
+                  target="_blank"
+                  class="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-transparent border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-gray-900 transition"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <!-- Project 6 - Blog -->
+          <div
+            class="relative group overflow-hidden rounded-xl shadow-lg hover-scale"
+          >
+            <div class="absolute top-4 right-4 z-10">
+              <span
+                class="bg-white text-gray-900 px-3 py-1 rounded-full text-xs font-semibold shadow-lg"
+              >
+                Live Demo
+              </span>
+            </div>
+            <img
+              src="assets/img/blog.png"
+              alt="Project 6"
+              class="w-full h-64 object-cover"
+            />
+            <div
+              class="absolute inset-0 bg-gradient-to-t from-gray-900 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6"
+            >
+              <h3 class="text-white text-xl font-bold mb-2">Blog Platform</h3>
+              <p class="text-gray-300 mb-4">Web Application</p>
+              <div class="flex space-x-3">
+                <a
+                  href="blog/index.html"
+                  target="_blank"
+                  class="bg-white text-gray-900 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-100 transition"
+                >
+                  View Project
+                </a>
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-transparent border border-white text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-white hover:text-gray-900 transition"
+                >
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-white">
+      <div class="container mx-auto px-6">
+        <h2 class="text-4xl font-bold text-center mb-12 text-gray-800">
+          Get In Touch
+        </h2>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          <!-- Contact Form -->
+          <div>
+            <form id="contact-form" class="space-y-6">
+              <div>
+                <label for="name" class="block text-gray-700 font-semibold mb-2"
+                  >Name</label
+                >
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
+                />
+              </div>
+              <div>
+                <label
+                  for="email"
+                  class="block text-gray-700 font-semibold mb-2"
+                  >Email</label
+                >
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
+                />
+              </div>
+              <div>
+                <label
+                  for="message"
+                  class="block text-gray-700 font-semibold mb-2"
+                  >Message</label
+                >
+                <textarea
+                  id="message"
+                  name="message"
+                  rows="5"
+                  required
+                  class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-900 transition"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="w-full bg-gray-900 text-white px-8 py-3 rounded-lg font-semibold hover:bg-gray-800 transition hover-scale"
+              >
+                Send Message
+              </button>
+            </form>
+            <div id="form-message" class="mt-4 text-center hidden"></div>
+          </div>
+
+          <!-- Contact Info -->
+          <div>
+            <div class="space-y-6">
+              <!-- Email -->
+              <div class="flex items-start space-x-4">
+                <div class="bg-gray-100 p-4 rounded-full">
+                  <i class="fas fa-envelope text-gray-900 text-xl"></i>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-semibold mb-1">Email</h3>
+                  <div class="flex items-center gap-2">
+                    <p id="email-text" class="text-gray-600">
+                      ••••••••••••••••••
+                    </p>
+                    <button
+                      onclick="toggleVisibility('email')"
+                      class="text-gray-900 hover:text-gray-700 transition"
+                    >
+                      <i id="email-icon" class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- WhatsApp -->
+              <div class="flex items-start space-x-4">
+                <div class="bg-green-100 p-4 rounded-full">
+                  <i class="fab fa-whatsapp text-green-600 text-xl"></i>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-semibold mb-1">WhatsApp</h3>
+                  <div class="flex items-center gap-2">
+                    <p id="whatsapp-text" class="text-gray-600">
+                      ••••••••••••••
+                    </p>
+                    <button
+                      onclick="toggleVisibility('whatsapp')"
+                      class="text-green-600 hover:text-green-700 transition"
+                    >
+                      <i id="whatsapp-icon" class="fas fa-eye"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Location -->
+              <div class="flex items-start space-x-4">
+                <div class="bg-blue-100 p-4 rounded-full">
+                  <i class="fas fa-map-marker-alt text-blue-600 text-xl"></i>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl font-semibold mb-1">Location</h3>
+                  <p class="text-gray-600">Phnom Penh, Cambodia</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Quick Contact Buttons -->
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold mb-4">Quick Contact</h3>
+              <div class="flex gap-4">
+                <a
+                  href="https://wa.me/85516700896"
+                  target="_blank"
+                  class="flex-1 bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition hover-scale text-center flex items-center justify-center gap-2"
+                >
+                  <i class="fab fa-whatsapp text-xl"></i>
+                  WhatsApp
+                </a>
+                <a
+                  href="https://t.me/PE_av"
+                  target="_blank"
+                  class="flex-1 bg-blue-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-600 transition hover-scale text-center flex items-center justify-center gap-2"
+                >
+                  <i class="fab fa-telegram text-xl"></i>
+                  Telegram
+                </a>
+              </div>
+            </div>
+
+            <!-- Social Media Links -->
+            <div class="mt-8">
+              <h3 class="text-xl font-semibold mb-4">Follow Me</h3>
+              <div class="flex space-x-4">
+                <a
+                  href="https://github.com/seavpeavpech24-bot"
+                  target="_blank"
+                  class="bg-gray-800 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-gray-700 transition hover-scale"
+                >
+                  <i class="fab fa-github text-xl"></i>
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/seavpeav-pech-557556254/"
+                  target="_blank"
+                  class="bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-blue-700 transition hover-scale"
+                >
+                  <i class="fab fa-linkedin text-xl"></i>
+                </a>
+                <a
+                  href="https://t.me/PE_av"
+                  target="_blank"
+                  class="bg-blue-400 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-blue-500 transition hover-scale"
+                >
+                  <i class="fab fa-telegram text-xl"></i>
+                </a>
+                <a
+                  href="#"
+                  class="bg-pink-600 text-white w-12 h-12 rounded-full flex items-center justify-center hover:bg-pink-700 transition hover-scale"
+                >
+                  <i class="fab fa-instagram text-xl"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-6">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <p class="text-gray-400 mb-4 md:mb-0">
+            &copy; 2026 Seavpeav Pech. All rights reserved.
+          </p>
+          <div class="flex space-x-6">
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              >Privacy Policy</a
+            >
+            <a href="#" class="text-gray-400 hover:text-white transition"
+              >Terms of Service</a
+            >
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scroll to Top Button -->
+    <button
+      id="scroll-top"
+      class="fixed bottom-8 right-8 bg-gray-900 text-white w-12 h-12 rounded-full shadow-lg hidden hover:bg-gray-800 transition hover-scale z-40"
+    >
+      <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JavaScript -->
+    <script>
+      // Mobile Menu Toggle
+      const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+      const mobileMenu = document.getElementById("mobile-menu");
+
+      mobileMenuBtn.addEventListener("click", () => {
+        mobileMenu.classList.toggle("hidden");
+      });
+
+      // Close mobile menu when clicking a link
+      const mobileLinks = mobileMenu.querySelectorAll("a");
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileMenu.classList.add("hidden");
+        });
+      });
+
+      // Smooth Scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Navbar Background on Scroll
+      const navbar = document.getElementById("navbar");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+          navbar.classList.add("shadow-lg");
+        } else {
+          navbar.classList.remove("shadow-lg");
+        }
+      });
+
+      // Scroll to Top Button
+      const scrollTopBtn = document.getElementById("scroll-top");
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 300) {
+          scrollTopBtn.classList.remove("hidden");
+        } else {
+          scrollTopBtn.classList.add("hidden");
+        }
+      });
+
+      scrollTopBtn.addEventListener("click", () => {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      });
+
+      // Contact Information Toggle
+      const contactInfo = {
+        email: { hidden: true, value: "seavpeavpech24@gmail.com" },
+        whatsapp: { hidden: true, value: "+855 16 700 896" },
+      };
+
+      function toggleVisibility(type) {
+        const textElement = document.getElementById(`${type}-text`);
+        const iconElement = document.getElementById(`${type}-icon`);
+
+        contactInfo[type].hidden = !contactInfo[type].hidden;
+
+        if (contactInfo[type].hidden) {
+          textElement.textContent = "••••••••••••••";
+          iconElement.className = "fas fa-eye";
+        } else {
+          textElement.textContent = contactInfo[type].value;
+          iconElement.className = "fas fa-eye-slash";
+        }
+      }
+
+      // Contact Form Submission
+      const contactForm = document.getElementById("contact-form");
+      const formMessage = document.getElementById("form-message");
+
+      contactForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Get form data
+        const name = document.getElementById("name").value;
+        const email = document.getElementById("email").value;
+        const message = document.getElementById("message").value;
+
+        // Create mailto link with form data
+        const subject = encodeURIComponent(`Portfolio Contact from ${name}`);
+        const body = encodeURIComponent(
+          `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`
+        );
+        const mailtoLink = `mailto:seavpeavpech24@gmail.com?subject=${subject}&body=${body}`;
+
+        // Open default email client
+        window.location.href = mailtoLink;
+
+        // Show success message
+        formMessage.classList.remove("hidden");
+        formMessage.className =
+          "mt-4 text-center p-4 bg-green-100 text-green-700 rounded-lg";
+        formMessage.textContent =
+          "Opening your email client... Please send the message from there.";
+
+        // Reset form after a delay
+        setTimeout(() => {
+          contactForm.reset();
+          formMessage.classList.add("hidden");
+        }, 3000);
+      });
+
+      // Intersection Observer for Fade-in Animation
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("fade-in");
+          }
+        });
+      }, observerOptions);
+
+      // Observe sections
+      document.querySelectorAll("section").forEach((section) => {
+        observer.observe(section);
+      });
+    </script>
+  </body>
+</html>
